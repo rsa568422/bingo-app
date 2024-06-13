@@ -17,8 +17,8 @@ public class ColorsService {
         return repository.findById(id);
     }
 
-    public Iterable<Colors> getByUserId(Integer userId) {
-        return repository.findByUserId(userId);
+    public Iterable<Colors> getByPlayerId(Integer playerId) {
+        return repository.findByPlayerId(playerId);
     }
 
     public Iterable<Colors> getByCardId(Integer cardId) {

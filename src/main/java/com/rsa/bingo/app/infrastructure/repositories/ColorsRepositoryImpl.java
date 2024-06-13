@@ -30,8 +30,8 @@ public class ColorsRepositoryImpl implements ColorsRepository {
     }
 
     @Override
-    public Iterable<Colors> findByUserId(Integer userId) {
-        return mapper.toColors(repository.findByUserId(userId));
+    public Iterable<Colors> findByPlayerId(Integer playerId) {
+        return mapper.toColors(repository.findByPlayerId(playerId));
     }
 
     @Override

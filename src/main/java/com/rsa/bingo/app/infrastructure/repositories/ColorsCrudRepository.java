@@ -10,6 +10,6 @@ public interface ColorsCrudRepository extends CrudRepository<ColorsEntity, Integ
 
     Iterable<ColorsEntity> findByCardId(Integer cardId);
 
-    @Query("select c from Colors c join c.card ca join ca.user u where u.id = ?")
-    Iterable<ColorsEntity> findByUserId(Integer userId);
+    @Query("select c from ColorsEntity c join fetch c.card ca join fetch ca.player p where p.id = ?1")
+    Iterable<ColorsEntity> findByPlayerId(Integer playerId);
 }

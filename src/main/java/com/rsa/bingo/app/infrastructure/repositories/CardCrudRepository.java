@@ -5,5 +5,5 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface CardCrudRepository extends CrudRepository<CardEntity, Integer> {
 
-    Iterable<CardEntity> findByUserId(Integer userId);
+    Iterable<CardEntity> findByPlayerId(Integer playerId);
 }

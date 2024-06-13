@@ -20,12 +20,12 @@ public class CardService {
         return repository.findAll();
     }
 
-    public Optional<Card> git(Integer id) {
+    public Optional<Card> get(Integer id) {
         return repository.findById(id);
     }
 
-    public Iterable<Card> gitByUserId(Integer userId) {
-        return repository.findByUserId(userId);
+    public Iterable<Card> getByPlayerId(Integer playerId) {
+        return repository.findByPlayerId(playerId);
     }
 
     public Card save(Card card) {

@@ -30,8 +30,8 @@ public class CardRepositoryImpl implements CardRepository {
     }
 
     @Override
-    public Iterable<Card> findByUserId(Integer userId) {
-        return mapper.toCards(repository.findByUserId(userId));
+    public Iterable<Card> findByPlayerId(Integer playerId) {
+        return mapper.toCards(repository.findByPlayerId(playerId));
     }
 
     @Override
