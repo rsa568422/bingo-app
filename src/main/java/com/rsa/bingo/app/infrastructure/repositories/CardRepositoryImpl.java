@@ -1,5 +1,6 @@
 package com.rsa.bingo.app.infrastructure.repositories;
 
+import com.rsa.bingo.app.infrastructure.mappers.CardMapper;
 import com.rsa.bingo.domain.models.Card;
 import com.rsa.bingo.domain.repositories.CardRepository;
 import org.springframework.stereotype.Repository;
@@ -11,22 +12,35 @@ public class CardRepositoryImpl implements CardRepository {
 
     private final CardCrudRepository repository;
 
-    public CardRepositoryImpl(CardCrudRepository repository) {
+    private final CardMapper mapper;
+
+    public CardRepositoryImpl(CardCrudRepository repository, CardMapper mapper) {
         this.repository = repository;
+        this.mapper = mapper;
     }
 
     @Override
     public Iterable<Card> findAll() {
-        return null;
+        return mapper.toCards(repository.findAll());
     }
 
     @Override
-    public Optional<Card> findById(Integer integer) {
-        return Optional.empty();
+    public Optional<Card> findById(Integer id) {
+        return repository.findById(id).map(mapper::toCard);
     }
 
     @Override
-    public Iterable<Card> findByUserId(Integer integer) {
-        return null;
+    public Iterable<Card> findByUserId(Integer userId) {
+        return mapper.toCards(repository.findByUserId(userId));
+    }
+
+    @Override
+    public Card save(Card card) {
+        return mapper.toCard(repository.save(mapper.toCardEntity(card)));
+    }
+
+    @Override
+    public void delete(Integer id) {
+        repository.deleteById(id);
     }
 }
