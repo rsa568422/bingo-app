@@ -1,6 +1,12 @@
 package com.rsa.bingo.app.application.services;
 
+import com.rsa.bingo.domain.models.Card;
+import com.rsa.bingo.domain.models.Colors;
+import com.rsa.bingo.domain.models.Parser;
 import com.rsa.bingo.domain.repositories.CardRepository;
+
+import java.io.IOException;
+import java.util.Optional;
 
 public class CardService {
 
@@ -8,5 +14,29 @@ public class CardService {
 
     public CardService(CardRepository repository) {
         this.repository = repository;
+    }
+
+    public Iterable<Card> getAll() {
+        return repository.findAll();
+    }
+
+    public Optional<Card> git(Integer id) {
+        return repository.findById(id);
+    }
+
+    public Iterable<Card> gitByUserId(Integer userId) {
+        return repository.findByUserId(userId);
+    }
+
+    public Card save(Card card) {
+        return repository.save(card);
+    }
+
+    public void delete(Integer id) {
+        repository.delete(id);
+    }
+
+    public byte[] toBytes(Card card, Colors colors) throws IOException {
+        return Parser.getBytes(card, colors);
     }
 }
