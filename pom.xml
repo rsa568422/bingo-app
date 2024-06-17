@@ -15,7 +15,7 @@
 	<description>App bingo</description>
 	<properties>
 		<java.version>21</java.version>
-		<bingo-domain.version>0.0.1</bingo-domain.version>
+		<bingo-domain.version>1.0.0-SNAPSHOT</bingo-domain.version>
 		<json.version>20240303</json.version>
 	</properties>
 	<dependencies>
