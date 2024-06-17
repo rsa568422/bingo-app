@@ -2,8 +2,8 @@ package com.rsa.bingo.app.application.services;
 
 import com.rsa.bingo.domain.models.Card;
 import com.rsa.bingo.domain.models.Colors;
-import com.rsa.bingo.domain.models.Parser;
 import com.rsa.bingo.domain.repositories.CardRepository;
+import com.rsa.bingo.domain.utils.Parser;
 
 import java.io.IOException;
 import java.util.Optional;

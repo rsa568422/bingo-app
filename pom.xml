@@ -14,13 +14,15 @@
 	<name>bingo-app</name>
 	<description>App bingo</description>
 	<properties>
-		<java.version>17</java.version>
+		<java.version>21</java.version>
+		<bingo-domain.version>0.0.1</bingo-domain.version>
+		<json.version>20240303</json.version>
 	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>com.rsa</groupId>
 			<artifactId>bingo-domain</artifactId>
-			<version>0.0.1</version>
+			<version>${bingo-domain.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -58,7 +60,7 @@
 		<dependency>
 			<groupId>org.json</groupId>
 			<artifactId>json</artifactId>
-			<version>20240303</version>
+			<version>${json.version}</version>
 		</dependency>
 	</dependencies>
 
