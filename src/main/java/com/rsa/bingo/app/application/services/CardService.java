@@ -5,7 +5,6 @@ import com.rsa.bingo.domain.models.Colors;
 import com.rsa.bingo.domain.repositories.CardRepository;
 import com.rsa.bingo.domain.utils.Parser;
 
-import java.io.IOException;
 import java.util.Optional;
 
 public class CardService {
@@ -36,7 +35,7 @@ public class CardService {
         repository.delete(id);
     }
 
-    public byte[] toBytes(Card card, Colors colors) throws IOException {
+    public byte[] toBytes(Card card, Colors colors) {
         return Parser.getBytes(card, colors);
     }
 }
