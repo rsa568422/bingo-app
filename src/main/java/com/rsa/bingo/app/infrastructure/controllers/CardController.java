@@ -7,9 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import java.util.Arrays;
 
 @RestController
 @RequestMapping("card")
@@ -22,8 +20,8 @@ public class CardController {
     }
 
     @GetMapping
-    public void get() throws IOException {
-        Files.write(Path.of("./src/main/resources").resolve("temp.xls"), service.toBytes(CARD, COLORS));
+    public String get() {
+        return Arrays.toString(service.toBytes(CARD, COLORS));
     }
 
     private static final Integer[][] VALUES = new Integer[][] {
