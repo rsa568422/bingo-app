@@ -6,7 +6,7 @@ services:
     image: bingo-app:1.0.0
     build: .
     ports:
-      - 8080:8080
+      - 9090:8080
     environment:
       DATA_SOURCE_URL: jdbc:postgresql://bingo_db:5432/bingo
       DATA_SOURCE_USERNAME: root
