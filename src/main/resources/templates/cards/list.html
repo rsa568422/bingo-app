@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Listado de cartones</title>
+        <!-- Bootstrap core CSS -->
+        <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    </head>
+    <body>
+        <!-- Header -->
+        <div th:insert="~{commons/template::header}"></div>
+
+        <div class="row">
+            <div class="col"><a th:href="@{/cards/builder}" class="btn btn-success">Generar</a></div>
+        </div>
+        <table th:insert="~{cards/template::list}"></table>
+
+        <!-- Bootstrap core JavaScript -->
+        <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    </body>
+</html>

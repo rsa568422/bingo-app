@@ -18,8 +18,8 @@ public class PlayerMapper {
 
     public PlayerEntity toPlayerEntity(Player player) {
         var playerEntity = new PlayerEntity();
-        playerEntity.setId(playerEntity.getId());
-        playerEntity.setName(playerEntity.getName());
+        playerEntity.setId(player.getId());
+        playerEntity.setName(player.getName());
         return playerEntity;
     }
 }

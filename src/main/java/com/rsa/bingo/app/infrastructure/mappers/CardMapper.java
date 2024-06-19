@@ -9,6 +9,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class CardMapper {
 
+    private final PlayerMapper playerMapper;
+
+    public CardMapper(PlayerMapper playerMapper) {
+        this.playerMapper = playerMapper;
+    }
+
     public Card toCard(CardEntity cardEntity) {
         var values = new Integer[3][9];
         var matrix = new JSONArray(cardEntity.getValues());
@@ -24,7 +30,7 @@ public class CardMapper {
         for (int i = 0; i < row2.length(); i++) {
             if (!row2.isNull(i)) values[2][i] = row2.optIntegerObject(i);
         }
-        return new Card(cardEntity.getId(), values);
+        return new Card(cardEntity.getId(), values, playerMapper.toPlayer(cardEntity.getPlayer()));
     }
 
     public Iterable<Card> toCards(Iterable<CardEntity> cardEntities) {
@@ -35,6 +41,7 @@ public class CardMapper {
         var cardEntity = new CardEntity();
         cardEntity.setId(card.getId());
         cardEntity.setValues(new JSONArray(card.getValues()).toString());
+        cardEntity.setPlayer(playerMapper.toPlayerEntity(card.getPlayer()));
         return cardEntity;
     }
 }

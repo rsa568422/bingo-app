@@ -8,8 +8,19 @@ import org.springframework.stereotype.Component;
 @Component
 public class ColorsMapper {
 
+    private final CardMapper cardMapper;
+
+    public ColorsMapper(CardMapper cardMapper) {
+        this.cardMapper = cardMapper;
+    }
+
     public Colors toColors(ColorsEntity colorsEntity) {
-        return new Colors(colorsEntity.getId(), colorsEntity.getPrimaryColor(), colorsEntity.getSecondaryColor());
+        return new Colors(
+                colorsEntity.getId(),
+                colorsEntity.getPrimaryColor(),
+                colorsEntity.getSecondaryColor(),
+                cardMapper.toCard(colorsEntity.getCard())
+        );
     }
 
     public Iterable<Colors> toColors(Iterable<ColorsEntity> colorsEntities) {
@@ -21,6 +32,7 @@ public class ColorsMapper {
         colorsEntity.setId(colors.getId());
         colorsEntity.setPrimaryColor(colors.getPrimaryColor());
         colorsEntity.setSecondaryColor(colors.getSecondaryColor());
+        colorsEntity.setCard(cardMapper.toCardEntity(colors.getCard()));
         return colorsEntity;
     }
 }

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+</head>
+<body>
+<!-- Header -->
+<div th:insert="~{commons/template::header}"></div>
+
+PLAYERS/LIST
+<a th:href="@{/players/create}">Registrar jugador</a>
+<a th:href="@{/players/view}">Ver jugador</a>
+
+<!-- Bootstrap core JavaScript -->
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
