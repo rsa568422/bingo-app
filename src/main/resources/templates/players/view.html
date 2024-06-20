@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+</head>
+<body>
+<!-- Header -->
+<div th:insert="~{commons/template::header}"></div>
+
+<p>ID: <span th:text="${player.id}"></span></p>
+<p>Nombre: <span th:text="${player.name}"></span></p>
+<div>
+    <lu>
+        <li th:each="card:${cards}"><a th:href="@{/card/{id} (id = ${card.id})}" th:text="${card.id}"></a></li>
+    </lu>
+</div>
+
+<!-- Bootstrap core JavaScript -->
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

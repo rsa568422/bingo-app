@@ -1,0 +1,36 @@
+<!--  -->
+<div th:fragment="builder">
+
+</div>
+
+<!-- card, color -->
+<div th:fragment="card" class="row" th:each="row:${card.values}">
+    <div th:each="column:${row}"
+         th:class="${column != null} ? 'col primaryColor-border' : 'col primaryColor-border secondaryColor-background'">
+        <p></p>
+        <span th:class="${column != null} ? 'primaryColor-text' : 'secondaryColor-background'"
+              th:text="${column != null} ? ${column} : '&nbsp;'"></span>
+        <p></p>
+    </div>
+</div>
+
+<!-- cards -->
+<table th:fragment="list" class="container">
+    <thead>
+    <tr class="row">
+        <th class="col">Identificador</th>
+        <th class="col">Jugador</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="row" th:each="card:${cards}" th:if="${!cards.isEmpty()}">
+        <td class="col">
+            <a th:text="${card.id}" th:href="@{/cards/{id} (id = ${card.id})}"></a>
+        </td>
+        <td class="col">
+            <a th:text="${card.player.name}" th:href="@{/players/{id} (id = ${card.player.id})}"></a>
+        </td>
+    </tr>
+    <span th:if="${cards.isEmpty()}">Sin resultados</span>
+    </tbody>
+</table>
