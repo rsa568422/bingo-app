@@ -1,6 +1,7 @@
-package com.rsa.bingo.app.infrastructure.repositories;
+package com.rsa.bingo.app.infrastructure.adapters;
 
 import com.rsa.bingo.app.infrastructure.mappers.PlayerMapper;
+import com.rsa.bingo.app.infrastructure.repositories.PlayerCrudRepository;
 import com.rsa.bingo.domain.models.Player;
 import com.rsa.bingo.domain.repositories.PlayerRepository;
 import org.springframework.stereotype.Repository;
@@ -8,13 +9,13 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public class PlayerRepositoryImpl implements PlayerRepository {
+public class PlayerRepositoryAdapter implements PlayerRepository {
 
     private final PlayerCrudRepository repository;
 
     private final PlayerMapper mapper;
 
-    public PlayerRepositoryImpl(PlayerCrudRepository repository, PlayerMapper mapper) {
+    public PlayerRepositoryAdapter(PlayerCrudRepository repository, PlayerMapper mapper) {
         this.repository = repository;
         this.mapper = mapper;
     }
@@ -30,8 +31,8 @@ public class PlayerRepositoryImpl implements PlayerRepository {
     }
 
     @Override
-    public Optional<Player> findByName(String name) {
-        return repository.findByName(name).map(mapper::toPlayer);
+    public Iterable<Player> findByName(String name) {
+        return mapper.toPlayers(repository.findByName(name));
     }
 
     @Override

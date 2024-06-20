@@ -1,6 +1,7 @@
-package com.rsa.bingo.app.infrastructure.repositories;
+package com.rsa.bingo.app.infrastructure.adapters;
 
 import com.rsa.bingo.app.infrastructure.mappers.CardMapper;
+import com.rsa.bingo.app.infrastructure.repositories.CardCrudRepository;
 import com.rsa.bingo.domain.models.Card;
 import com.rsa.bingo.domain.repositories.CardRepository;
 import org.springframework.stereotype.Repository;
@@ -8,20 +9,15 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public class CardRepositoryImpl implements CardRepository {
+public class CardRepositoryAdapter implements CardRepository {
 
     private final CardCrudRepository repository;
 
     private final CardMapper mapper;
 
-    public CardRepositoryImpl(CardCrudRepository repository, CardMapper mapper) {
+    public CardRepositoryAdapter(CardCrudRepository repository, CardMapper mapper) {
         this.repository = repository;
         this.mapper = mapper;
-    }
-
-    @Override
-    public Iterable<Card> findAll() {
-        return mapper.toCards(repository.findAll());
     }
 
     @Override
