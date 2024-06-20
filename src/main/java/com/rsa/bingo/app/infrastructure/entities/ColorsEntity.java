@@ -17,7 +17,4 @@ public class ColorsEntity {
 
     @Column(name = "secondary_color")
     private String secondaryColor;
-
-    @ManyToOne
-    private CardEntity card;
 }
