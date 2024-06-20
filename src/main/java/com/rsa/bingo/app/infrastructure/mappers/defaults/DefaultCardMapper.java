@@ -23,7 +23,7 @@ public class DefaultCardMapper implements CardMapper {
         var values = new Integer[3][9];
         for (int i = 0; i < 3; i++)
             for (int j = 0; j < 9; j++)
-                values[i][j] = json.getJSONArray(i).getInt(j);
+                values[i][j] = json.getJSONArray(i).optIntegerObject(j, null);
         return new Card(cardEntity.getId(), values, playerMapper.toPlayer(cardEntity.getPlayer()));
     }
 

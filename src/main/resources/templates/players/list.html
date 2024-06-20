@@ -10,9 +10,13 @@
 <!-- Header -->
 <div th:insert="~{commons/template::header}"></div>
 
-PLAYERS/LIST
-<a th:href="@{/players/create}">Registrar jugador</a>
-<a th:href="@{/players/view}">Ver jugador</a>
+<div>
+    <ul>
+        <li th:each="player:${players}">
+            <a th:text="${player.name}" th:href="@{/player/{id} (id = ${player.id})}"></a>
+        </li>
+    </ul>
+</div>
 
 <!-- Bootstrap core JavaScript -->
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>

@@ -17,10 +17,10 @@ public class ColorsEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "primary")
+    @Column(name = "primary_color")
     private String primary;
 
-    @Column(name = "secondary")
+    @Column(name = "secondary_color")
     private String secondary;
 
     public int[] getPrimaryRGB() {

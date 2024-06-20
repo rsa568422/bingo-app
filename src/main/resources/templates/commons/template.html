@@ -3,8 +3,8 @@
         <div class="container-fluid">
             <a class="navbar-brand text-success" th:href="@{/home}">Bingo</a>
             <form class="d-flex" role="search">
-                <a class="btn btn-outline-success me-2" th:href="@{/players}">Jugadores</a>
-                <a class="btn btn-outline-success" th:href="@{/cards}">Cartones</a>
+                <a class="btn btn-outline-success me-2" th:href="@{/player}">Listado de Jugadores</a>
+                <a class="btn btn-outline-success" th:href="@{/card/builder}">Generador de Cartones</a>
             </form>
         </div>
     </nav>
@@ -13,40 +13,32 @@
 <!-- color -->
 <style th:inline="css" th:fragment="styleColor">
     .primaryColor-border {
-        border-color: rgb([[${color.primaryRGB[0]}]],[[${color.primaryRGB[1]}]],[[${color.primaryRGB[2]}]]);
+        border-color: rgb([[${color.primary[0]}]],[[${color.primary[1]}]],[[${color.primary[2]}]]);
         border-style: solid;
         border-width: medium;
     }
     .primaryColor-text {
-        color: rgb([[${color.primaryRGB[0]}]],[[${color.primaryRGB[1]}]],[[${color.primaryRGB[2]}]]);
+        color: rgb([[${color.primary[0]}]],[[${color.primary[1]}]],[[${color.primary[2]}]]);
     }
     .primaryColor-background {
-        background-color: rgb([[${color.primaryRGB[0]}]],[[${color.primaryRGB[1]}]],[[${color.primaryRGB[2]}]]);
+        background-color: rgb([[${color.primary[0]}]],[[${color.primary[1]}]],[[${color.primary[2]}]]);
     }
     .secondaryColor-border {
-        border-color: rgb([[${color.secondaryRGB[0]}]],[[${color.secondaryRGB[1]}]],[[${color.secondaryRGB[2]}]]);
+        border-color: rgb([[${color.secondary[0]}]],[[${color.secondary[1]}]],[[${color.secondary[2]}]]);
         border-style: solid;
         border-width: medium;
     }
     .secondaryColor-background {
-        background-color: rgb([[${color.secondaryRGB[0]}]],[[${color.secondaryRGB[1]}]],[[${color.secondaryRGB[2]}]]);
+        background-color: rgb([[${color.secondary[0]}]],[[${color.secondary[1]}]],[[${color.secondary[2]}]]);
     }
 </style>
 
 <!-- colors -->
 <style th:inline="css" th:each="color:${colors}" th:fragment="styleColors">
     .[['primaryColor_' + ${color.id}]] {
-        background-color: rgb(
-            [[${color.primaryRGB[0]}]],
-            [[${color.primaryRGB[1]}]],
-            [[${color.primaryRGB[2]}]]
-        );
+        background-color: rgb([[${color.primary[0]}]], [[${color.primary[1]}]], [[${color.primary[2]}]]);
     }
     .[['secondaryColor_' + ${color.id}]] {
-        background-color: rgb(
-            [[${color.secondaryRGB[0]}]],
-            [[${color.secondaryRGB[1]}]],
-            [[${color.secondaryRGB[2]}]]
-        );
+        background-color: rgb([[${color.secondary[0]}]], [[${color.secondary[1]}]], [[${color.secondary[2]}]]);
     }
 </style>

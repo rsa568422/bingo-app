@@ -10,7 +10,13 @@
 <!-- Header -->
 <div th:insert="~{commons/template::header}"></div>
 
-PLAYERS/VIEW
+<p>ID: <span th:text="${player.id}"></span></p>
+<p>Nombre: <span th:text="${player.name}"></span></p>
+<div>
+    <lu>
+        <li th:each="card:${cards}"><a th:href="@{/card/{id} (id = ${card.id})}" th:text="${card.id}"></a></li>
+    </lu>
+</div>
 
 <!-- Bootstrap core JavaScript -->
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>

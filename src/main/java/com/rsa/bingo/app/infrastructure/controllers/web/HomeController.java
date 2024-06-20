@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping
 public class HomeController {
 
-    @GetMapping({"", "/", "/home"})
+    @GetMapping({"", "/", "/home", "home/"})
     public String home() {
-        return "/home";
+        return "redirect:/player";
     }
 }
