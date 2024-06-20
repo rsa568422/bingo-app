@@ -1,6 +1,7 @@
-package com.rsa.bingo.app.infrastructure.repositories;
+package com.rsa.bingo.app.infrastructure.adapters;
 
 import com.rsa.bingo.app.infrastructure.mappers.ColorsMapper;
+import com.rsa.bingo.app.infrastructure.repositories.ColorsCrudRepository;
 import com.rsa.bingo.domain.models.Colors;
 import com.rsa.bingo.domain.repositories.ColorsRepository;
 import org.springframework.stereotype.Repository;
@@ -8,15 +9,20 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public class ColorsRepositoryImpl implements ColorsRepository {
+public class ColorsRepositoryAdapter implements ColorsRepository {
 
     private final ColorsCrudRepository repository;
 
     private final ColorsMapper mapper;
 
-    public ColorsRepositoryImpl(ColorsCrudRepository repository, ColorsMapper mapper) {
+    public ColorsRepositoryAdapter(ColorsCrudRepository repository, ColorsMapper mapper) {
         this.repository = repository;
         this.mapper = mapper;
+    }
+
+    @Override
+    public Iterable<Colors> findAll() {
+        return mapper.toColors(repository.findAll());
     }
 
     @Override
@@ -27,20 +33,5 @@ public class ColorsRepositoryImpl implements ColorsRepository {
     @Override
     public Iterable<Colors> findByCardId(Integer cardId) {
         return mapper.toColors(repository.findByCardId(cardId));
-    }
-
-    @Override
-    public Iterable<Colors> findByPlayerId(Integer playerId) {
-        return mapper.toColors(repository.findByPlayerId(playerId));
-    }
-
-    @Override
-    public Colors save(Colors colors) {
-        return mapper.toColors(repository.save(mapper.toColorsEntity(colors)));
-    }
-
-    @Override
-    public void delete(Integer id) {
-        repository.deleteById(id);
     }
 }
