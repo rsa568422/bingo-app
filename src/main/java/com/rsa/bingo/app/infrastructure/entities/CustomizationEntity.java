@@ -1,6 +1,5 @@
 package com.rsa.bingo.app.infrastructure.entities;
 
-
 import com.rsa.bingo.app.infrastructure.entities.keys.CustomizationKey;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
