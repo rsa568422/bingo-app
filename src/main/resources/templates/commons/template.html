@@ -1,10 +1,16 @@
 <div th:fragment="header">
     <nav class="navbar border-bottom border-body bg-dark" data-bs-theme="dark">
         <div class="container-fluid">
-            <a class="navbar-brand text-success" th:href="@{/home}">Bingo</a>
+            <a class="navbar-brand text-success fw-bold" th:href="@{/home}">Bingo</a>
             <form class="d-flex" role="search">
-                <a class="btn btn-outline-success me-2" th:href="@{/player}">Listado de Jugadores</a>
-                <a class="btn btn-outline-success" th:href="@{/card/builder}">Generador de Cartones</a>
+                <a th:href="@{/player}"
+                   class="link-success link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover me-4">
+                    Listado de Jugadores
+                </a>
+                <a th:href="@{/card/builder}"
+                   class="link-success link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover me-1">
+                    Generador de Cartones
+                </a>
             </form>
         </div>
     </nav>
