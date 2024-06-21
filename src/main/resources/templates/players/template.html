@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<!-- list(players) -->
+<table th:fragment="list" class="table align-middle caption-top">
+    <caption><p class="h1 text-center text-black">Jugadores</p></caption>
+    <thead class="table-success">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre</th>
+        </tr>
+    </thead>
+    <tbody class="table-group-divider">
+        <tr th:each="player:${players}">
+            <th scope="row">
+                <a th:href="@{/player/{id} (id = ${player.id})}" th:text="${player.id}"
+                   class=" text-success link-underline link-underline-opacity-0"></a>
+            </th>
+            <td>
+                <a th:href="@{/player/{id} (id = ${player.id})}" th:text="${player.name}"
+                   class="link-offset-2 link-underline link-underline-opacity-0 text-black"></a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+</html>
