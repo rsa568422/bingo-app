@@ -19,17 +19,26 @@ public class CustomizationRepositoryAdapter implements CustomizationRepository {
     }
 
     @Override
+    public Iterable<Customization> findByCardId(Integer cardId) {
+        return mapper.toCustomizations(repository.findByCardId(cardId));
+    }
+
+    @Override
     public Customization save(Customization customization) {
         return mapper.toCustomization(repository.save(mapper.toCustomizationEntity(customization)));
     }
 
     @Override
     public void delete(Integer cardId) {
-        repository.deleteByCardId(cardId);
+        repository.delete(cardId);
     }
 
     @Override
-    public void delete(Integer cardId, Integer colorsId) {
-        repository.deleteByCardId(cardId, colorsId);
+    public void delete(Customization customization) {
+        repository.delete(
+                customization.getCardId(),
+                customization.getPrimary().getName(),
+                customization.getSecondary().getName()
+        );
     }
 }

@@ -13,32 +13,32 @@
 <!-- color -->
 <style th:inline="css" th:fragment="styleColor">
     .primaryColor-border {
-        border-color: rgb([[${color.primary[0]}]],[[${color.primary[1]}]],[[${color.primary[2]}]]);
+        border-color: rgb([[${customization.primary[0]}]],[[${customization.primary[1]}]],[[${customization.primary[2]}]]);
         border-style: solid;
         border-width: medium;
     }
     .primaryColor-text {
-        color: rgb([[${color.primary[0]}]],[[${color.primary[1]}]],[[${color.primary[2]}]]);
+        color: rgb([[${customization.primary[0]}]],[[${customization.primary[1]}]],[[${customization.primary[2]}]]);
     }
     .primaryColor-background {
-        background-color: rgb([[${color.primary[0]}]],[[${color.primary[1]}]],[[${color.primary[2]}]]);
+        background-color: rgb([[${customization.primary[0]}]],[[${customization.primary[1]}]],[[${customization.primary[2]}]]);
     }
     .secondaryColor-border {
-        border-color: rgb([[${color.secondary[0]}]],[[${color.secondary[1]}]],[[${color.secondary[2]}]]);
+        border-color: rgb([[${customization.secondary[0]}]],[[${customization.secondary[1]}]],[[${customization.secondary[2]}]]);
         border-style: solid;
         border-width: medium;
     }
     .secondaryColor-background {
-        background-color: rgb([[${color.secondary[0]}]],[[${color.secondary[1]}]],[[${color.secondary[2]}]]);
+        background-color: rgb([[${customization.secondary[0]}]],[[${customization.secondary[1]}]],[[${customization.secondary[2]}]]);
     }
 </style>
 
 <!-- colors -->
-<style th:inline="css" th:each="color:${colors}" th:fragment="styleColors">
-    .[['primaryColor_' + ${color.id}]] {
-        background-color: rgb([[${color.primary[0]}]], [[${color.primary[1]}]], [[${color.primary[2]}]]);
+<style th:inline="css" th:each="customization:${customizations}" th:fragment="styleColors">
+    .[['primaryColor_' + ${customization.id}]] {
+        background-color: rgb([[${customization.primary[0]}]], [[${customization.primary[1]}]], [[${customization.primary[2]}]]);
     }
     .[['secondaryColor_' + ${color.id}]] {
-        background-color: rgb([[${color.secondary[0]}]], [[${color.secondary[1]}]], [[${color.secondary[2]}]]);
+        background-color: rgb([[${customization.secondary[0]}]], [[${customization.secondary[1]}]], [[${customization.secondary[2]}]]);
     }
 </style>
