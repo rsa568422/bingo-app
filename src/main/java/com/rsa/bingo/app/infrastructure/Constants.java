@@ -1,6 +1,7 @@
 package com.rsa.bingo.app.infrastructure;
 
-import com.rsa.bingo.domain.models.Colors;
+import com.rsa.bingo.domain.models.Color;
+import com.rsa.bingo.domain.models.Customization;
 
 public final class Constants {
 
@@ -12,5 +13,10 @@ public final class Constants {
     public static final String CARD = "card";
     public static final String COLORS = "colors";
     public static final String COLOR = "color";
-    public static final Colors DEFAULT_COLOR = new Colors(0, new int[] {0, 0, 0}, new int[] {128, 128, 128});
+    public static final String CUSTOMIZATION = "customization";
+    public static final String CUSTOMIZATIONS = "customizations";
+
+    public static Customization defaultCustomization(Integer cardId) {
+        return new Customization(cardId, Color.BLACK, Color.GREY_50_PERCENT);
+    }
 }

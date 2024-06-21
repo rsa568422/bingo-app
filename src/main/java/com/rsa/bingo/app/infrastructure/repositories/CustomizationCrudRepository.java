@@ -8,11 +8,14 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface CustomizationCrudRepository extends CrudRepository<CustomizationEntity, CustomizationKey> {
 
-    @Modifying
-    @Query("delete from CustomizationEntity cu join fetch key.card ca where ca.id = ?1")
-    void deleteByCardId(Integer cardId);
+    @Query("select c from CustomizationEntity c where c.key.card.id = ?1")
+    Iterable<CustomizationEntity> findByCardId(Integer cardId);
 
     @Modifying
-    @Query("delete from CustomizationEntity cu join fetch key.card ca join fetch key.colors co where ca.id = ?1 and co.id = ?2")
-    void deleteByCardId(Integer cardId, Integer colorsId);
+    @Query("delete from CustomizationEntity c where c.key.card.id = ?1")
+    void delete(Integer cardId);
+
+    @Modifying
+    @Query("delete from CustomizationEntity c where (c.key.card.id = ?1) and (c.key.primaryColor = ?2) and (c.key.secondaryColor = ?3)")
+    void delete(Integer cardId, String primaryColor, String secondaryColor);
 }

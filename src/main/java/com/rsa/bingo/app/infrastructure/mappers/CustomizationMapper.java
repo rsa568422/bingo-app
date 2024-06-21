@@ -7,5 +7,7 @@ public interface CustomizationMapper {
 
     Customization toCustomization(CustomizationEntity customizationEntity);
 
+    Iterable<Customization> toCustomizations(Iterable<CustomizationEntity> customizationEntities);
+
     CustomizationEntity toCustomizationEntity(Customization customization);
 }

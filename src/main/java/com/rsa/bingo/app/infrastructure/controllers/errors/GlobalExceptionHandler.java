@@ -21,6 +21,6 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
             model.addAttribute(MESSAGE, exception.getMessage());
         else
             model.addAttribute(MESSAGE, "Error desconocido");
-        return "redirect:/commons/error";
+        return "commons/error";
     }
 }
