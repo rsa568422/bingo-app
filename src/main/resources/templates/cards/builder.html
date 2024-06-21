@@ -7,22 +7,10 @@
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
 </head>
 <body>
-<div th:insert="~{commons/template::styleColor}"></div>
-<div th:insert="~{commons/template::styleColors}"></div>
-<!-- Header -->
-<div th:insert="~{commons/template::header}"></div>
+    <!-- Header -->
+    <div th:insert="~{commons/template::header}"></div>
 
-<div class="container text-center mt-3">
-    <div class="row mt-5 fs-1">
-        <div class="col-2"></div>
-        <div class="col-8 primaryColor-border">
-            <div th:insert="~{cards/template::card}"></div>
-        </div>
-        <div class="col-2"></div>
-    </div>
-</div>
-
-<!-- Bootstrap core JavaScript -->
-<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>
