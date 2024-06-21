@@ -4,4 +4,6 @@ import com.rsa.bingo.app.infrastructure.entities.PlayerEntity;
 import org.springframework.data.repository.CrudRepository;
 
 public interface PlayerCrudRepository extends CrudRepository<PlayerEntity, Integer> {
+
+    Iterable<PlayerEntity> findByName(String name);
 }

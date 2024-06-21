@@ -4,4 +4,6 @@ import com.rsa.bingo.app.infrastructure.entities.CardEntity;
 import org.springframework.data.repository.CrudRepository;
 
 public interface CardCrudRepository extends CrudRepository<CardEntity, Integer> {
+
+    Iterable<CardEntity> findByPlayerId(Integer playerId);
 }
