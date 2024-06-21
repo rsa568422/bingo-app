@@ -7,9 +7,7 @@ import com.rsa.bingo.app.infrastructure.mappers.CustomizationMapper;
 import com.rsa.bingo.domain.models.Color;
 import com.rsa.bingo.domain.models.Customization;
 import org.apache.commons.collections4.IterableUtils;
-import org.springframework.stereotype.Component;
 
-@Component
 public class DefaultCustomizationMapper implements CustomizationMapper {
 
     @Override

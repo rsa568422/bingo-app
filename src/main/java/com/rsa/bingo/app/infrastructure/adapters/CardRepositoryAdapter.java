@@ -4,11 +4,9 @@ import com.rsa.bingo.app.infrastructure.mappers.CardMapper;
 import com.rsa.bingo.app.infrastructure.repositories.CardCrudRepository;
 import com.rsa.bingo.domain.models.Card;
 import com.rsa.bingo.domain.repositories.CardRepository;
-import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-@Repository
 public class CardRepositoryAdapter implements CardRepository {
 
     private final CardCrudRepository repository;
