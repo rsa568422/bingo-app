@@ -8,9 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import static com.rsa.bingo.app.infrastructure.Constants.CARDS;
-import static com.rsa.bingo.app.infrastructure.Constants.PLAYER;
-import static com.rsa.bingo.app.infrastructure.Constants.PLAYERS;
+import static com.rsa.bingo.app.infrastructure.Constants.*;
 
 @Controller
 @RequestMapping("/player")
@@ -35,6 +33,7 @@ public class PlayerController {
     public String get(@PathVariable Integer id, Model model) {
         model.addAttribute(PLAYER, playerService.findById(id));
         model.addAttribute(CARDS, cardService.findByPlayerId(id));
+        model.addAttribute(CUSTOMIZATION, defaultCustomization(null));
         return "players/view";
     }
 }

@@ -7,8 +7,24 @@
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
 </head>
 <body class="bg-secondary">
-    <!-- Header -->
+    <!-- style(customization) -->
+    <div th:insert="~{cards/template::style}"></div>
+    <!-- header() -->
     <div th:insert="~{commons/template::header}"></div>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-3">
+                <!-- view(player) -->
+                <div th:insert="~{players/template::view}"></div>
+            </div>
+            <div class="col-1"></div>
+            <div class="col-8">
+                <!-- cards(cards) -->
+                <div th:insert="~{players/template::cards}"></div>
+            </div>
+        </div>
+    </div>
 
     <!-- Bootstrap core JavaScript -->
     <script th:src="@{/js/bootstrap.bundle.min.js}"></script>

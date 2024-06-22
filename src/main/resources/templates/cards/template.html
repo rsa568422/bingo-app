@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<!-- style(customization) -->
+<style th:fragment="style" th:inline="css">
+    .primaryColor-border {
+        border-color: rgb([[${customization.primaryRGB[0]}]],[[${customization.primaryRGB[1]}]],[[${customization.primaryRGB[2]}]]);
+        border-style: solid;
+        border-width: medium;
+    }
+    .primaryColor-text {
+        color: rgb([[${customization.primaryRGB[0]}]],[[${customization.primaryRGB[1]}]],[[${customization.primaryRGB[2]}]]);
+    }
+    .primaryColor-background {
+        background-color: white;
+    }
+    .secondaryColor-background {
+        background-color: rgb([[${customization.secondaryRGB[0]}]],[[${customization.secondaryRGB[1]}]],[[${customization.secondaryRGB[2]}]]);
+    }
+</style>
+
+<!-- view(card) -->
+<div th:fragment="view">
+    <div class="row" th:each="row:${card.values}">
+        <div th:each="column:${row}"
+             th:class="${column != null} ? 'col primaryColor-border primaryColor-background text-center fs-3' : 'col primaryColor-border secondaryColor-background'">
+            <p></p>
+            <span th:class="${column != null} ? 'primaryColor-text primaryColor-background' : 'secondaryColor-background'"
+                  th:text="${column != null} ? ${column} : '&nbsp;'"></span>
+            <p></p>
+        </div>
+    </div>
+</div>
+
+</html>

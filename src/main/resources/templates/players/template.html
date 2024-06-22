@@ -26,4 +26,30 @@
     </tbody>
 </table>
 
+<!-- view(player) -->
+<div th:fragment="view" class="card text-bg-dark mb-3 text-center" style="max-width: 18rem;">
+    <div class="card-header">
+        <h1 class="text-success">Jugador</h1>
+    </div>
+    <div class="card-body">
+        <h5 class="card-title" th:text="${player.name}"></h5>
+        <p class="card-text">ID: <span th:text="${player.id}"></span></p>
+    </div>
+</div>
+
+<!-- cards(cards) -->
+<div th:fragment="cards">
+    <div class="row mb-2" th:each="card:${cards}">
+        <div class="col-1">
+            <a th:href="@{/card/{id} (id = ${card.id})}" class="text-success link-underline link-underline-opacity-0 ">
+                <span class="badge text-bg-success fs-3 mt-3" th:text="${card.id}"></span>
+            </a>
+        </div>
+        <div class="col-1"></div>
+        <div class="col-10">
+            <div th:insert="~{cards/template::view}"></div>
+        </div>
+    </div>
+</div>
+
 </html>
