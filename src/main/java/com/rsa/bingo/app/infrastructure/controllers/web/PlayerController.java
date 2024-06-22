@@ -1,7 +1,7 @@
 package com.rsa.bingo.app.infrastructure.controllers.web;
 
-import com.rsa.bingo.domain.services.CardService;
-import com.rsa.bingo.domain.services.PlayerService;
+import com.rsa.bingo.app.application.services.DtoCardService;
+import com.rsa.bingo.app.application.services.DtoPlayerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,11 +16,11 @@ import static com.rsa.bingo.app.infrastructure.Constants.PLAYERS;
 @RequestMapping("/player")
 public class PlayerController {
 
-    private final PlayerService playerService;
+    private final DtoPlayerService playerService;
 
-    private final CardService cardService;
+    private final DtoCardService cardService;
 
-    public PlayerController(PlayerService playerService, CardService cardService) {
+    public PlayerController(DtoPlayerService playerService, DtoCardService cardService) {
         this.playerService = playerService;
         this.cardService = cardService;
     }
@@ -33,9 +33,8 @@ public class PlayerController {
 
     @GetMapping("/{id}")
     public String get(@PathVariable Integer id, Model model) {
-        var player = playerService.findById(id).orElseThrow(() -> new VerifyError("Player not found"));
-        model.addAttribute(PLAYER, player);
-        model.addAttribute(CARDS, cardService.findByPlayerId(player.getId()));
+        model.addAttribute(PLAYER, playerService.findById(id));
+        model.addAttribute(CARDS, cardService.findByPlayerId(id));
         return "players/view";
     }
 }

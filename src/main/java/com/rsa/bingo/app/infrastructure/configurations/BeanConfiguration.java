@@ -1,8 +1,5 @@
 package com.rsa.bingo.app.infrastructure.configurations;
 
-import com.rsa.bingo.app.application.services.SpringCardService;
-import com.rsa.bingo.app.application.services.SpringCustomizationService;
-import com.rsa.bingo.app.application.services.SpringPlayerService;
 import com.rsa.bingo.app.infrastructure.adapters.CardRepositoryAdapter;
 import com.rsa.bingo.app.infrastructure.adapters.CustomizationRepositoryAdapter;
 import com.rsa.bingo.app.infrastructure.adapters.PlayerRepositoryAdapter;
@@ -18,9 +15,6 @@ import com.rsa.bingo.app.infrastructure.repositories.PlayerCrudRepository;
 import com.rsa.bingo.domain.repositories.CardRepository;
 import com.rsa.bingo.domain.repositories.CustomizationRepository;
 import com.rsa.bingo.domain.repositories.PlayerRepository;
-import com.rsa.bingo.domain.services.CardService;
-import com.rsa.bingo.domain.services.CustomizationService;
-import com.rsa.bingo.domain.services.PlayerService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -28,20 +22,18 @@ import org.springframework.context.annotation.Configuration;
 public class BeanConfiguration {
 
     @Bean
-    public PlayerService playerService(PlayerRepository playerRepository,
-                                       CardRepository cardRepository,
-                                       CustomizationRepository customizationRepository) {
-        return new SpringPlayerService(playerRepository, cardRepository, customizationRepository);
+    public PlayerMapper playerMapper() {
+        return new DefaultPlayerMapper();
     }
 
     @Bean
-    public CardService cardService(CardRepository cardRepository, CustomizationRepository customizationRepository) {
-        return new SpringCardService(cardRepository, customizationRepository);
+    public CardMapper cardMapper(PlayerMapper playerMapper) {
+        return new DefaultCardMapper(playerMapper);
     }
 
     @Bean
-    public CustomizationService customizationService(CustomizationRepository customizationRepository) {
-        return new SpringCustomizationService(customizationRepository);
+    public CustomizationMapper customizationMapper() {
+        return new DefaultCustomizationMapper();
     }
 
     @Bean
@@ -58,20 +50,5 @@ public class BeanConfiguration {
     @Bean
     public PlayerRepository playerRepository(PlayerCrudRepository repository, PlayerMapper mapper) {
         return new PlayerRepositoryAdapter(repository, mapper);
-    }
-
-    @Bean
-    public PlayerMapper playerMapper() {
-        return new DefaultPlayerMapper();
-    }
-
-    @Bean
-    public CardMapper cardMapper(PlayerMapper playerMapper) {
-        return new DefaultCardMapper(playerMapper);
-    }
-
-    @Bean
-    public CustomizationMapper customizationMapper() {
-        return new DefaultCustomizationMapper();
     }
 }
