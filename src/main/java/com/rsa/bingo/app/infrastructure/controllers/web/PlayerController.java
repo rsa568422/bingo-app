@@ -1,7 +1,7 @@
 package com.rsa.bingo.app.infrastructure.controllers.web;
 
-import com.rsa.bingo.app.application.services.DtoCardService;
-import com.rsa.bingo.app.application.services.DtoPlayerService;
+import com.rsa.bingo.app.application.services.WebCardService;
+import com.rsa.bingo.app.application.services.WebPlayerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,11 +16,11 @@ import static com.rsa.bingo.app.infrastructure.Constants.PLAYERS;
 @RequestMapping("/player")
 public class PlayerController {
 
-    private final DtoPlayerService playerService;
+    private final WebPlayerService playerService;
 
-    private final DtoCardService cardService;
+    private final WebCardService cardService;
 
-    public PlayerController(DtoPlayerService playerService, DtoCardService cardService) {
+    public PlayerController(WebPlayerService playerService, WebCardService cardService) {
         this.playerService = playerService;
         this.cardService = cardService;
     }

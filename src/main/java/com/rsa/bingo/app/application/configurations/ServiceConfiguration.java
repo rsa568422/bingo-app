@@ -3,9 +3,9 @@ package com.rsa.bingo.app.application.configurations;
 import com.rsa.bingo.app.application.adapters.CardServiceAdapter;
 import com.rsa.bingo.app.application.adapters.CustomizationServiceAdapter;
 import com.rsa.bingo.app.application.adapters.PlayerServiceAdapter;
-import com.rsa.bingo.app.application.services.DtoCardService;
-import com.rsa.bingo.app.application.services.DtoCustomizationService;
-import com.rsa.bingo.app.application.services.DtoPlayerService;
+import com.rsa.bingo.app.application.services.WebCardService;
+import com.rsa.bingo.app.application.services.WebCustomizationService;
+import com.rsa.bingo.app.application.services.WebPlayerService;
 import com.rsa.bingo.domain.repositories.CardRepository;
 import com.rsa.bingo.domain.repositories.CustomizationRepository;
 import com.rsa.bingo.domain.repositories.PlayerRepository;
@@ -36,17 +36,17 @@ public class ServiceConfiguration {
     }
 
     @Bean
-    public DtoCardService dtoCardService(CardService cardService) {
+    public WebCardService dtoCardService(CardService cardService) {
         return new CardServiceAdapter(cardService);
     }
 
     @Bean
-    public DtoCustomizationService dtoCustomizationService(CustomizationService customizationService) {
+    public WebCustomizationService dtoCustomizationService(CustomizationService customizationService) {
         return new CustomizationServiceAdapter(customizationService);
     }
 
     @Bean
-    public DtoPlayerService dtoPlayerService(PlayerService playerService) {
+    public WebPlayerService dtoPlayerService(PlayerService playerService) {
         return new PlayerServiceAdapter(playerService);
     }
 }

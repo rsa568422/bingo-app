@@ -1,6 +1,6 @@
 package com.rsa.bingo.app.application.adapters;
 
-import com.rsa.bingo.app.application.services.DtoPlayerService;
+import com.rsa.bingo.app.application.services.WebPlayerService;
 import com.rsa.bingo.app.infrastructure.dtos.PlayerDTO;
 import com.rsa.bingo.domain.services.PlayerService;
 import org.apache.commons.collections4.IterableUtils;
@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.NoSuchElementException;
 
-public class PlayerServiceAdapter implements DtoPlayerService {
+public class PlayerServiceAdapter implements WebPlayerService {
 
     private final PlayerService service;
 

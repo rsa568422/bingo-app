@@ -1,14 +1,13 @@
 package com.rsa.bingo.app.application.adapters;
 
-import com.rsa.bingo.app.application.services.DtoCustomizationService;
+import com.rsa.bingo.app.application.services.WebCustomizationService;
 import com.rsa.bingo.app.infrastructure.dtos.CustomizationDTO;
 import com.rsa.bingo.domain.services.CustomizationService;
-
-import java.util.LinkedList;
+import org.apache.commons.collections4.IterableUtils;
 
 import static com.rsa.bingo.app.infrastructure.Constants.defaultCustomization;
 
-public class CustomizationServiceAdapter implements DtoCustomizationService {
+public class CustomizationServiceAdapter implements WebCustomizationService {
 
     private final CustomizationService service;
 
@@ -18,11 +17,12 @@ public class CustomizationServiceAdapter implements DtoCustomizationService {
 
     @Override
     public Iterable<CustomizationDTO> findByCardId(Integer cardId) {
-        var customizations = new LinkedList<CustomizationDTO>();
-        customizations.add(CustomizationDTO.valueOf(defaultCustomization(cardId)));
-        service.findByCardId(cardId)
-                .forEach(customization -> customizations.add(CustomizationDTO.valueOf(customization)));
-        return customizations;
+        var defaultCustomization = defaultCustomization(cardId).toCustomization();
+        var customizations = IterableUtils.toList(service.findByCardId(cardId));
+        if (!customizations.contains(defaultCustomization)) {
+            customizations.addFirst(defaultCustomization);
+        }
+        return customizations.stream().map(CustomizationDTO::valueOf).toList();
     }
 
     @Override

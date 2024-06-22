@@ -1,7 +1,7 @@
 package com.rsa.bingo.app.infrastructure.controllers.web;
 
-import com.rsa.bingo.app.application.services.DtoCardService;
-import com.rsa.bingo.app.application.services.DtoCustomizationService;
+import com.rsa.bingo.app.application.services.WebCardService;
+import com.rsa.bingo.app.application.services.WebCustomizationService;
 import com.rsa.bingo.app.infrastructure.dtos.CardDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,18 +18,18 @@ import static com.rsa.bingo.app.infrastructure.Constants.defaultCustomization;
 @RequestMapping("/card")
 public class CardController {
 
-    private final DtoCardService cardService;
+    private final WebCardService cardService;
 
-    private final DtoCustomizationService customizationService;
+    private final WebCustomizationService customizationService;
 
-    public CardController(DtoCardService cardService, DtoCustomizationService customizationService) {
+    public CardController(WebCardService cardService, WebCustomizationService customizationService) {
         this.cardService = cardService;
         this.customizationService = customizationService;
     }
 
     @GetMapping("/{id}")
     public String get(@PathVariable Integer id, Model model) {
-        model.addAttribute(CARD, cardService);
+        model.addAttribute(CARD, cardService.findById(id));
         model.addAttribute(CUSTOMIZATIONS, customizationService.findByCardId(id));
         model.addAttribute(CUSTOMIZATION, defaultCustomization(id));
         return "cards/view";

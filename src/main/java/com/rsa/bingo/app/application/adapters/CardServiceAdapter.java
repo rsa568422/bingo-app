@@ -1,6 +1,6 @@
 package com.rsa.bingo.app.application.adapters;
 
-import com.rsa.bingo.app.application.services.DtoCardService;
+import com.rsa.bingo.app.application.services.WebCardService;
 import com.rsa.bingo.app.infrastructure.dtos.CardDTO;
 import com.rsa.bingo.app.infrastructure.dtos.CustomizationDTO;
 import com.rsa.bingo.domain.services.CardService;
@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.NoSuchElementException;
 
-public class CardServiceAdapter implements DtoCardService {
+public class CardServiceAdapter implements WebCardService {
 
     private final CardService service;
 

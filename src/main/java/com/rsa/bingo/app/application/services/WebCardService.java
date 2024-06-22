@@ -3,7 +3,7 @@ package com.rsa.bingo.app.application.services;
 import com.rsa.bingo.app.infrastructure.dtos.CardDTO;
 import com.rsa.bingo.app.infrastructure.dtos.CustomizationDTO;
 
-public interface DtoCardService {
+public interface WebCardService {
 
     CardDTO findById(Integer id);
 
