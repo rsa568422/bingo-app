@@ -7,8 +7,30 @@
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
 </head>
 <body class="bg-secondary">
+    <!-- style(customization) -->
+    <div th:insert="~{cards/template::style}"></div>
+    <!-- styles(customizations) -->
+    <div th:insert="~{cards/template::styles}"></div>
     <!-- header() -->
     <div th:insert="~{commons/template::header}"></div>
+
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-1">
+                <a class="btn btn-dark text-success fw-bold" th:href="@{/player/{id} (id = ${card.playerId})}">volver</a>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-7">
+                <!-- view(card) -->
+                <div th:insert="~{cards/template::view}"></div>
+            </div>
+            <div class="col-5">
+                <!-- list(customizations) -->
+                <div th:insert="~{cards/template::list}"></div>
+            </div>
+        </div>
+    </div>
 
     <!-- Bootstrap core JavaScript -->
     <script th:src="@{/js/bootstrap.bundle.min.js}"></script>

@@ -19,6 +19,24 @@
     }
 </style>
 
+<!-- styles(customizations) -->
+<style th:fragment="styles" th:inline="css" th:each="savedStyle:${customizations}">
+    .primaryColor-border-[[${savedStyle.primaryName + '-' + savedStyle.secondaryName}]] {
+        border-color: rgb([[${customization.primaryRGB[0]}]],[[${customization.primaryRGB[1]}]],[[${customization.primaryRGB[2]}]]);
+        border-style: solid;
+        border-width: medium;
+    }
+    .primaryColor-text-[[${savedStyle.primaryName + '-' + savedStyle.secondaryName}]] {
+        color: rgb([[${customization.primaryRGB[0]}]],[[${customization.primaryRGB[1]}]],[[${customization.primaryRGB[2]}]]);
+    }
+    .primaryColor-background-[[${savedStyle.primaryName + '-' + savedStyle.secondaryName}]] {
+        background-color: white;
+    }
+    .secondaryColor-background-[[${savedStyle.primaryName + '-' + savedStyle.secondaryName}]] {
+        background-color: rgb([[${customization.secondaryRGB[0]}]],[[${customization.secondaryRGB[1]}]],[[${customization.secondaryRGB[2]}]]);
+    }
+</style>
+
 <!-- view(card) -->
 <div th:fragment="view">
     <div class="row" th:each="row:${card.values}">
@@ -28,6 +46,23 @@
             <span th:class="${column != null} ? 'primaryColor-text primaryColor-background' : 'secondaryColor-background'"
                   th:text="${column != null} ? ${column} : '&nbsp;'"></span>
             <p></p>
+        </div>
+    </div>
+</div>
+
+<!-- list(customizations) -->
+<div th:fragment="list" class="card text-bg-dark mb-3 text-center">
+    <div class="card-header">
+        <h1 class="text-success">Personalizaciones</h1>
+    </div>
+    <div class="card-body">
+        <div class="card-text">
+            <div class="row" th:each="savedCustomization:${customizations}">
+                <div class="col-2 "></div>
+                <div class="col-4 primaryColor-border primaryColor-background primaryColor-text text-center fs-3">N</div>
+                <div class="col-4 primaryColor-border secondaryColor-background">&nbsp;</div>
+                <div class="col-2"></div>
+            </div>
         </div>
     </div>
 </div>

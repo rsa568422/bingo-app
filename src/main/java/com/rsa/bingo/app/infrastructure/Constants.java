@@ -13,7 +13,6 @@ public final class Constants {
     public static final String CARDS = "cards";
     public static final String CARD = "card";
     public static final String COLORS = "colors";
-    public static final String COLOR = "color";
     public static final String CUSTOMIZATION = "customization";
     public static final String CUSTOMIZATIONS = "customizations";
 
