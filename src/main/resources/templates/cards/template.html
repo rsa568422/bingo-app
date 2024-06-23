@@ -118,7 +118,7 @@
         </div>
         <div class="card-footer">
             <div class="row" style="padding-left: 4%; padding-right: 4%;">
-                <a class="btn btn-outline-success">Nueva personalización</a>
+                <a th:href="@{/card/customize/{id} (id = ${card.id})}" class="btn btn-outline-success">Nueva personalización</a>
             </div>
         </div>
     </div>

@@ -12,10 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import static com.rsa.bingo.app.infrastructure.Constants.CARD;
-import static com.rsa.bingo.app.infrastructure.Constants.CUSTOMIZATION;
-import static com.rsa.bingo.app.infrastructure.Constants.CUSTOMIZATIONS;
-import static com.rsa.bingo.app.infrastructure.Constants.defaultCustomization;
+import static com.rsa.bingo.app.infrastructure.Constants.*;
 
 @Controller
 @RequestMapping("/card")
@@ -39,13 +36,31 @@ public class CardController {
     }
 
     @GetMapping("/{id}/{primary}/{secondary}")
-    public String customize(@PathVariable Integer id, @PathVariable String primary,
+    public String applyCustomization(@PathVariable Integer id, @PathVariable String primary,
                             @PathVariable String secondary, Model model) {
         model.addAttribute(CARD, cardService.findById(id));
         model.addAttribute(CUSTOMIZATIONS, customizationService.findByCardId(id));
         model.addAttribute(CUSTOMIZATION, new CustomizationDTO(id, Color.valueOf(primary), Color.valueOf(secondary)));
         return "cards/view";
     }
+
+    @GetMapping("/customize/{id}")
+    public String customize(@PathVariable Integer id, Model model) {
+        model.addAttribute(CARD, cardService.findById(id));
+        model.addAttribute(CUSTOMIZATION, defaultCustomization(id));
+        model.addAttribute(COLORS, Color.values());
+        return "cards/customizer";
+    }
+
+    @GetMapping("/customize/{id}/{primary}/{secondary}")
+    public String customize(@PathVariable Integer id, @PathVariable String primary,
+                            @PathVariable String secondary, Model model) {
+        model.addAttribute(CARD, cardService.findById(id));
+        model.addAttribute(CUSTOMIZATION, new CustomizationDTO(id, Color.valueOf(primary), Color.valueOf(secondary)));
+        model.addAttribute(COLORS, Color.values());
+        return "cards/customizer";
+    }
+
 
     @GetMapping("/builder")
     public String builder(Model model) {
@@ -58,6 +73,7 @@ public class CardController {
     public String fill(CardDTO card, Model model) {
         model.addAttribute(CARD, card);
         model.addAttribute(CUSTOMIZATION, defaultCustomization(null));
+        model.addAttribute(COLORS, Color.values());
         try {
             card.toCard();
         } catch (VerifyError error) {
