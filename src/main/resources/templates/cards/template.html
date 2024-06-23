@@ -50,6 +50,49 @@
     </div>
 </div>
 
+<!-- fill(card) -->
+<div th:fragment="fill">
+    <div class="row">
+        <div class="input-group">
+            <input th:field=${card.values[0][0]} type="number" min="1" max="99" class="form-control primaryColor-border primaryColor-background text-center fs-3"/>
+            <input th:field=${card.values[0][1]} type="number" min="1" max="99" class="form-control primaryColor-border primaryColor-background text-center fs-3"/>
+            <input th:field=${card.values[0][2]} type="number" min="1" max="99" class="form-control primaryColor-border primaryColor-background text-center fs-3"/>
+            <input th:field=${card.values[0][3]} type="number" min="1" max="99" class="form-control primaryColor-border primaryColor-background text-center fs-3"/>
+            <input th:field=${card.values[0][4]} type="number" min="1" max="99" class="form-control primaryColor-border primaryColor-background text-center fs-3"/>
+            <input th:field=${card.values[0][5]} type="number" min="1" max="99" class="form-control primaryColor-border primaryColor-background text-center fs-3"/>
+            <input th:field=${card.values[0][6]} type="number" min="1" max="99" class="form-control primaryColor-border primaryColor-background text-center fs-3"/>
+            <input th:field=${card.values[0][7]} type="number" min="1" max="99" class="form-control primaryColor-border primaryColor-background text-center fs-3"/>
+            <input th:field=${card.values[0][8]} type="number" min="1" max="99" class="form-control primaryColor-border primaryColor-background text-center fs-3"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-group">
+            <input th:field=${card.values[1][0]} type="number" min="1" max="99" class="form-control primaryColor-border primaryColor-background text-center fs-3"/>
+            <input th:field=${card.values[1][1]} type="number" min="1" max="99" class="form-control primaryColor-border primaryColor-background text-center fs-3"/>
+            <input th:field=${card.values[1][2]} type="number" min="1" max="99" class="form-control primaryColor-border primaryColor-background text-center fs-3"/>
+            <input th:field=${card.values[1][3]} type="number" min="1" max="99" class="form-control primaryColor-border primaryColor-background text-center fs-3"/>
+            <input th:field=${card.values[1][4]} type="number" min="1" max="99" class="form-control primaryColor-border primaryColor-background text-center fs-3"/>
+            <input th:field=${card.values[1][5]} type="number" min="1" max="99" class="form-control primaryColor-border primaryColor-background text-center fs-3"/>
+            <input th:field=${card.values[1][6]} type="number" min="1" max="99" class="form-control primaryColor-border primaryColor-background text-center fs-3"/>
+            <input th:field=${card.values[1][7]} type="number" min="1" max="99" class="form-control primaryColor-border primaryColor-background text-center fs-3"/>
+            <input th:field=${card.values[1][8]} type="number" min="1" max="99" class="form-control primaryColor-border primaryColor-background text-center fs-3"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-group">
+            <input th:field=${card.values[2][0]} type="number" min="1" max="99" class="form-control primaryColor-border primaryColor-background text-center fs-3"/>
+            <input th:field=${card.values[2][1]} type="number" min="1" max="99" class="form-control primaryColor-border primaryColor-background text-center fs-3"/>
+            <input th:field=${card.values[2][2]} type="number" min="1" max="99" class="form-control primaryColor-border primaryColor-background text-center fs-3"/>
+            <input th:field=${card.values[2][3]} type="number" min="1" max="99" class="form-control primaryColor-border primaryColor-background text-center fs-3"/>
+            <input th:field=${card.values[2][4]} type="number" min="1" max="99" class="form-control primaryColor-border primaryColor-background text-center fs-3"/>
+            <input th:field=${card.values[2][5]} type="number" min="1" max="99" class="form-control primaryColor-border primaryColor-background text-center fs-3"/>
+            <input th:field=${card.values[2][6]} type="number" min="1" max="99" class="form-control primaryColor-border primaryColor-background text-center fs-3"/>
+            <input th:field=${card.values[2][7]} type="number" min="1" max="99" class="form-control primaryColor-border primaryColor-background text-center fs-3"/>
+            <input th:field=${card.values[2][8]} type="number" min="1" max="99" class="form-control primaryColor-border primaryColor-background text-center fs-3"/>
+        </div>
+    </div>
+</div>
+
 <!-- list(customizations) -->
 <div th:fragment="list" class="card text-bg-dark mb-3 text-center">
     <div class="card-header">

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import static com.rsa.bingo.app.infrastructure.Constants.CARD;
@@ -51,5 +52,18 @@ public class CardController {
         model.addAttribute(CARD, new CardDTO());
         model.addAttribute(CUSTOMIZATION, defaultCustomization(null));
         return "cards/builder";
+    }
+
+    @PostMapping("/fill")
+    public String fill(CardDTO card, Model model) {
+        model.addAttribute(CARD, card);
+        model.addAttribute(CUSTOMIZATION, defaultCustomization(null));
+        try {
+            card.toCard();
+        } catch (VerifyError error) {
+            model.addAttribute("message", error.getMessage());
+            return "cards/builder";
+        }
+        return "cards/customizer";
     }
 }

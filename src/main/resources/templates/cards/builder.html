@@ -7,8 +7,44 @@
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
 </head>
 <body class="bg-secondary">
+    <!-- style(customization) -->
+    <div th:insert="~{cards/template::style}"></div>
     <!-- header() -->
     <div th:insert="~{commons/template::header}"></div>
+
+    <div class="container mt-5">
+        <form th:action="@{/card/fill}" method="post" th:object="${card}">
+            <div th:if="${message != null}" class="row">
+                <div class="coll">
+                    <h1 class="text-danger fs-2" th:text="${message}"></h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-7">
+                    <!-- fill(card) -->
+                    <div th:insert="~{cards/template::fill}"></div>
+                </div>
+                <div class="col-1"></div>
+                <div class="col-4">
+                    <div class="card text-bg-dark mb-3 text-center">
+                        <div class="card-header">
+                            <h2 class="text-success">Números</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-text">
+                                <h5>Introduzca los números en las posiciones adecuadas</h5>
+                            </div>
+                            <div class="card-footer">
+                                <div class="row" style="padding-left: 4%; padding-right: 4%;">
+                                    <button type="submit" class="btn btn-outline-success">Seguir</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
 
     <!-- Bootstrap core JavaScript -->
     <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
