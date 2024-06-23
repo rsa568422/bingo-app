@@ -36,7 +36,7 @@ public class CardController {
     }
 
     @GetMapping("/{id}/{primary}/{secondary}")
-    public String applyCustomization(@PathVariable Integer id, @PathVariable String primary,
+    public String apply(@PathVariable Integer id, @PathVariable String primary,
                             @PathVariable String secondary, Model model) {
         model.addAttribute(CARD, cardService.findById(id));
         model.addAttribute(CUSTOMIZATIONS, customizationService.findByCardId(id));
@@ -61,6 +61,11 @@ public class CardController {
         return "cards/customizer";
     }
 
+    @PostMapping("/customize")
+    public String save(CustomizationDTO customization) {
+        customizationService.save(customization);
+        return String.format("redirect:/card/%d", customization.getCardId());
+    }
 
     @GetMapping("/builder")
     public String builder(Model model) {

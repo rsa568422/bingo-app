@@ -64,9 +64,16 @@
                             </div>
                         </div>
                         <div class="card-footer">
-                            <div class="row" style="padding-left: 4%; padding-right: 4%;">
-                                <a class="btn btn-outline-success">Guardar personalización</a>
-                            </div>
+                            <form th:action="@{/card/customize}" method="post" th:object="${customization}">
+                                <input th:field="${customization.cardId}" hidden />
+                                <input th:field="${customization.primaryName}" hidden />
+                                <input th:field="${customization.primaryRGB}" hidden />
+                                <input th:field="${customization.secondaryName}" hidden />
+                                <input th:field="${customization.secondaryRGB}" hidden />
+                                <div class="row" style="padding-left: 4%; padding-right: 4%;">
+                                    <button type="submit" class="btn btn-outline-success">Guardar personalización</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
