@@ -5,15 +5,11 @@ import com.rsa.bingo.app.application.services.WebCustomizationService;
 import com.rsa.bingo.app.infrastructure.dtos.CardDTO;
 import com.rsa.bingo.app.infrastructure.dtos.CustomizationDTO;
 import com.rsa.bingo.domain.models.Color;
-import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.io.IOException;
-import java.nio.file.Path;
 
 import static com.rsa.bingo.app.infrastructure.Constants.CARD;
 import static com.rsa.bingo.app.infrastructure.Constants.CUSTOMIZATION;
@@ -55,15 +51,5 @@ public class CardController {
         model.addAttribute(CARD, new CardDTO());
         model.addAttribute(CUSTOMIZATION, defaultCustomization(null));
         return "cards/builder";
-    }
-
-    @GetMapping("/build/{values}/{primary}/{secondary}")
-    public String build(@PathVariable String values, @PathVariable String primary, @PathVariable String secondary)
-            throws IOException {
-        var card = new CardDTO(null, values, null, null);
-        var customization = new CustomizationDTO(null, Color.valueOf(primary), Color.valueOf(secondary));
-        var bytes = cardService.toBytes(card, customization);
-        FileUtils.writeByteArrayToFile(Path.of("./temp.xls").toFile(), bytes);
-        return "commons/home";
     }
 }

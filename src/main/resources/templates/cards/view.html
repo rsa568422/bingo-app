@@ -19,7 +19,8 @@
             </div>
             <div class="col-5"></div>
             <div class="col-1">
-                <a th:href="@{/card/build/{values}/{primary}/{secondary} (values = ${card.getValuesJson()}, primary = ${customization.primaryName}, secondary = ${customization.secondaryName})}" class="btn btn-success fw-bold">
+                <a th:href="@{/card/build/{values}/{primary}/{secondary} (values = ${card.getValuesJson()}, primary = ${customization.primaryName}, secondary = ${customization.secondaryName})}"
+                   class="btn btn-success fw-bold" th:download="${card.playerName} + '_' + ${customization.primaryName} + '_' + ${customization.secondaryName} + '.xls'">
                     Generar
                 </a>
             </div>
