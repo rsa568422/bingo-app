@@ -42,7 +42,7 @@
     <div class="row mb-2" th:each="card:${cards}">
         <div class="col-1">
             <a th:href="@{/card/{id} (id = ${card.id})}" class="text-success link-underline link-underline-opacity-0">
-                <span class="badge text-bg-success fs-3 mt-3" th:text="${card.id}"></span>
+                <span class="badge bg-dark text-success fs-3 mt-3" th:text="${card.id}"></span>
             </a>
         </div>
         <div class="col-1"></div>
