@@ -17,6 +17,12 @@
             <div class="col-1">
                 <a class="btn btn-dark text-success fw-bold" th:href="@{/player/{id} (id = ${card.playerId})}">volver</a>
             </div>
+            <div class="col-5"></div>
+            <div class="col-1">
+                <a th:href="@{/card/build/{values}/{primary}/{secondary} (values = ${card.getValuesJson()}, primary = ${customization.primaryName}, secondary = ${customization.secondaryName})}" class="btn btn-success fw-bold">
+                    Generar
+                </a>
+            </div>
         </div>
         <div class="row mt-3">
             <div class="col-7">

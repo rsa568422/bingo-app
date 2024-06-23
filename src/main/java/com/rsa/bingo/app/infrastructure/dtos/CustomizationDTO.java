@@ -21,6 +21,10 @@ public class CustomizationDTO {
 
     private int[] secondaryRGB;
 
+    public CustomizationDTO(Integer cardId, Color primary, Color secondary) {
+        this(cardId, primary.getName(), primary.getRgb(), secondary.getName(), secondary.getRgb());
+    }
+
     public Customization toCustomization() {
         return new Customization(cardId, Color.valueOf(primaryName), Color.valueOf(secondaryName));
     }

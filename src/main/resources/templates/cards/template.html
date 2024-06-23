@@ -57,13 +57,18 @@
     </div>
     <div class="card-body">
         <div class="card-text">
-            <a th:each="savedCustomization:${customizations}" th:href="@{/home}" class="link-underline link-underline-opacity-0">
+            <a th:each="savedCustomization:${customizations}" th:href="@{/card/{id}/{primary}/{secondary} (id = ${savedCustomization.cardId}, primary = ${savedCustomization.primaryName}, secondary = ${savedCustomization.secondaryName})}"
+               class="link-underline link-underline-opacity-0">
                 <div class="row mt-2">
                     <div class="col-3 align-center">
                         <div th:hidden="${!savedCustomization.equals(customization)}" class="badge bg-success mt-2 fs-5">&nbsp;</div>
                     </div>
-                    <div th:class="'col-4 primaryColor-border-' + ${savedCustomization.primaryName} + '-' + ${savedCustomization.secondaryName} + ' primaryColor-background-' + ${savedCustomization.primaryName} + '-' + ${savedCustomization.secondaryName} + ' primaryColor-text-' + ${savedCustomization.primaryName} + '-' + ${savedCustomization.secondaryName} + ' text-center fs-3'">N</div>
-                    <div th:class="'col-4 primaryColor-border-' + ${savedCustomization.primaryName} + '-' + ${savedCustomization.secondaryName} + ' secondaryColor-background-' + ${savedCustomization.primaryName} + '-' + ${savedCustomization.secondaryName}">&nbsp;</div>
+                    <div th:class="'col-4 primaryColor-border-' + ${savedCustomization.primaryName} + '-' + ${savedCustomization.secondaryName} + ' primaryColor-background-' + ${savedCustomization.primaryName} + '-' + ${savedCustomization.secondaryName} + ' primaryColor-text-' + ${savedCustomization.primaryName} + '-' + ${savedCustomization.secondaryName} + ' text-center fs-3'">
+                        N
+                    </div>
+                    <div th:class="'col-4 primaryColor-border-' + ${savedCustomization.primaryName} + '-' + ${savedCustomization.secondaryName} + ' secondaryColor-background-' + ${savedCustomization.primaryName} + '-' + ${savedCustomization.secondaryName}">
+                        &nbsp;
+                    </div>
                     <div class="col-1"></div>
                 </div>
             </a>
