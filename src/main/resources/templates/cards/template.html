@@ -19,21 +19,21 @@
     }
 </style>
 
-<!-- styles(customizations) -->
-<style th:fragment="styles" th:inline="css" th:each="savedStyle:${customizations}">
+<!-- style(customizations) -->
+<style th:inline="css" th:each="savedStyle:${customizations}">
     .primaryColor-border-[[${savedStyle.primaryName + '-' + savedStyle.secondaryName}]] {
-        border-color: rgb([[${customization.primaryRGB[0]}]],[[${customization.primaryRGB[1]}]],[[${customization.primaryRGB[2]}]]);
+        border-color: rgb([[${savedStyle.primaryRGB[0]}]],[[${savedStyle.primaryRGB[1]}]],[[${savedStyle.primaryRGB[2]}]]);
         border-style: solid;
         border-width: medium;
     }
     .primaryColor-text-[[${savedStyle.primaryName + '-' + savedStyle.secondaryName}]] {
-        color: rgb([[${customization.primaryRGB[0]}]],[[${customization.primaryRGB[1]}]],[[${customization.primaryRGB[2]}]]);
+        color: rgb([[${savedStyle.primaryRGB[0]}]],[[${savedStyle.primaryRGB[1]}]],[[${savedStyle.primaryRGB[2]}]]);
     }
     .primaryColor-background-[[${savedStyle.primaryName + '-' + savedStyle.secondaryName}]] {
         background-color: white;
     }
     .secondaryColor-background-[[${savedStyle.primaryName + '-' + savedStyle.secondaryName}]] {
-        background-color: rgb([[${customization.secondaryRGB[0]}]],[[${customization.secondaryRGB[1]}]],[[${customization.secondaryRGB[2]}]]);
+        background-color: rgb([[${savedStyle.secondaryRGB[0]}]],[[${savedStyle.secondaryRGB[1]}]],[[${savedStyle.secondaryRGB[2]}]]);
     }
 </style>
 
@@ -53,16 +53,20 @@
 <!-- list(customizations) -->
 <div th:fragment="list" class="card text-bg-dark mb-3 text-center">
     <div class="card-header">
-        <h1 class="text-success">Personalizaciones</h1>
+        <h2 class="text-success">Personalizaciones</h2>
     </div>
     <div class="card-body">
         <div class="card-text">
-            <div class="row" th:each="savedCustomization:${customizations}">
-                <div class="col-2 "></div>
-                <div class="col-4 primaryColor-border primaryColor-background primaryColor-text text-center fs-3">N</div>
-                <div class="col-4 primaryColor-border secondaryColor-background">&nbsp;</div>
-                <div class="col-2"></div>
-            </div>
+            <a th:each="savedCustomization:${customizations}" th:href="@{/home}" class="link-underline link-underline-opacity-0">
+                <div class="row mt-2">
+                    <div class="col-3 align-center">
+                        <div th:hidden="${!savedCustomization.equals(customization)}" class="badge bg-success mt-2 fs-5">&nbsp;</div>
+                    </div>
+                    <div th:class="'col-4 primaryColor-border-' + ${savedCustomization.primaryName} + '-' + ${savedCustomization.secondaryName} + ' primaryColor-background-' + ${savedCustomization.primaryName} + '-' + ${savedCustomization.secondaryName} + ' primaryColor-text-' + ${savedCustomization.primaryName} + '-' + ${savedCustomization.secondaryName} + ' text-center fs-3'">N</div>
+                    <div th:class="'col-4 primaryColor-border-' + ${savedCustomization.primaryName} + '-' + ${savedCustomization.secondaryName} + ' secondaryColor-background-' + ${savedCustomization.primaryName} + '-' + ${savedCustomization.secondaryName}">&nbsp;</div>
+                    <div class="col-1"></div>
+                </div>
+            </a>
         </div>
     </div>
 </div>

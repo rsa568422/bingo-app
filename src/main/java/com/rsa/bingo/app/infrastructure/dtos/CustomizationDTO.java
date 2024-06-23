@@ -2,13 +2,11 @@ package com.rsa.bingo.app.infrastructure.dtos;
 
 import com.rsa.bingo.domain.models.Color;
 import com.rsa.bingo.domain.models.Customization;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
+@EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
 public class CustomizationDTO {
