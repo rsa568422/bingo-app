@@ -14,6 +14,7 @@
 
     <div class="container mt-5">
         <form th:action="@{/card/fill}" method="post" th:object="${card}">
+            <input type="hidden" th:field=${card.playerId}>
             <div th:if="${message != null}" class="row">
                 <div class="coll">
                     <h1 class="text-danger fs-2" th:text="${message}"></h1>
@@ -36,7 +37,7 @@
                             </div>
                             <div class="card-footer">
                                 <div class="row" style="padding-left: 4%; padding-right: 4%;">
-                                    <button type="submit" class="btn btn-outline-success">Seguir</button>
+                                    <button type="submit" class="btn btn-outline-success">Guardar</button>
                                 </div>
                             </div>
                         </div>

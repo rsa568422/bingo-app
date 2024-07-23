@@ -2,11 +2,10 @@ package com.rsa.bingo.app.infrastructure.controllers.web;
 
 import com.rsa.bingo.app.application.services.WebCardService;
 import com.rsa.bingo.app.application.services.WebPlayerService;
+import com.rsa.bingo.app.infrastructure.dtos.PlayerDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import static com.rsa.bingo.app.infrastructure.Constants.*;
 
@@ -35,5 +34,23 @@ public class PlayerController {
         model.addAttribute(CARDS, cardService.findByPlayerId(id));
         model.addAttribute(CUSTOMIZATION, defaultCustomization(null));
         return "players/view";
+    }
+
+    @GetMapping("/create")
+    public String create(Model model) {
+        model.addAttribute(PLAYER, new PlayerDTO());
+        return "players/create";
+    }
+
+    @PostMapping("/{id}")
+    public String delete(@PathVariable Integer id) {
+        playerService.delete(id);
+        return "redirect:/player";
+    }
+
+    @PostMapping
+    public String save(PlayerDTO player) {
+        player = playerService.save(player);
+        return String.format("redirect:/player/%d", player.getId());
     }
 }

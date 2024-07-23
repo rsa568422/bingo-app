@@ -67,24 +67,32 @@ public class CardController {
         return String.format("redirect:/card/%d", customization.getCardId());
     }
 
-    @GetMapping("/builder")
-    public String builder(Model model) {
-        model.addAttribute(CARD, new CardDTO());
+    @GetMapping("/builder/{id}")
+    public String builder(@PathVariable Integer id, Model model) {
+        model.addAttribute(CARD, new CardDTO(null, new Integer[3][9], id, null));
         model.addAttribute(CUSTOMIZATION, defaultCustomization(null));
         return "cards/builder";
     }
 
     @PostMapping("/fill")
     public String fill(CardDTO card, Model model) {
-        model.addAttribute(CARD, card);
-        model.addAttribute(CUSTOMIZATION, defaultCustomization(null));
-        model.addAttribute(COLORS, Color.values());
         try {
-            card.toCard();
+            card = cardService.save(card);
+            return String.format("redirect:/player/%s", card.getPlayerId());
         } catch (VerifyError error) {
             model.addAttribute("message", error.getMessage());
             return "cards/builder";
+        } finally {
+            model.addAttribute(CARD, card);
+            model.addAttribute(CUSTOMIZATION, defaultCustomization(card.getId()));
+            model.addAttribute(COLORS, Color.values());
         }
-        return "cards/customizer";
+    }
+
+    @PostMapping("/{id}")
+    public String delete(@PathVariable Integer id) {
+        var card = cardService.findById(id);
+        cardService.delete(id);
+        return String.format("redirect:/player/%d", card.getPlayerId());
     }
 }
