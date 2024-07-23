@@ -6,9 +6,7 @@ import com.rsa.bingo.app.infrastructure.mappers.PlayerMapper;
 import com.rsa.bingo.domain.models.Card;
 import org.apache.commons.collections4.IterableUtils;
 import org.json.JSONArray;
-import org.springframework.stereotype.Component;
 
-@Component
 public class DefaultCardMapper implements CardMapper {
 
     private final PlayerMapper playerMapper;

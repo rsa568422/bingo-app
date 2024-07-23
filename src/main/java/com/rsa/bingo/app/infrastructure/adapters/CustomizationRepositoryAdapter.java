@@ -4,9 +4,7 @@ import com.rsa.bingo.app.infrastructure.mappers.CustomizationMapper;
 import com.rsa.bingo.app.infrastructure.repositories.CustomizationCrudRepository;
 import com.rsa.bingo.domain.models.Customization;
 import com.rsa.bingo.domain.repositories.CustomizationRepository;
-import org.springframework.stereotype.Repository;
 
-@Repository
 public class CustomizationRepositoryAdapter implements CustomizationRepository {
 
     private final CustomizationCrudRepository repository;

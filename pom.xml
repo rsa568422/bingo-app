@@ -10,12 +10,12 @@
 	</parent>
 	<groupId>com.rsa</groupId>
 	<artifactId>bingo-app</artifactId>
-	<version>1.2.0</version>
+	<version>1.2.1</version>
 	<name>bingo-app</name>
 	<description>App bingo</description>
 	<properties>
 		<java.version>21</java.version>
-		<bingo-domain.version>1.2.0</bingo-domain.version>
+		<bingo-domain.version>1.2.1</bingo-domain.version>
 		<json.version>20240303</json.version>
 	</properties>
 	<dependencies>

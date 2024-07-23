@@ -4,9 +4,7 @@ import com.rsa.bingo.app.infrastructure.entities.PlayerEntity;
 import com.rsa.bingo.app.infrastructure.mappers.PlayerMapper;
 import com.rsa.bingo.domain.models.Player;
 import org.apache.commons.collections4.IterableUtils;
-import org.springframework.stereotype.Component;
 
-@Component
 public class DefaultPlayerMapper implements PlayerMapper {
 
     @Override

@@ -6,9 +6,16 @@
     <!-- Bootstrap core CSS -->
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
 </head>
-<body>
-    <!-- Header -->
+<body class="bg-secondary">
+    <!-- header() -->
     <div th:insert="~{commons/template::header}"></div>
+
+    <div class="container mt-5">
+        <div class="row">
+            <!-- create(player) -->
+            <div th:insert="~{players/template::create}"></div>
+        </div>
+    </div>
 
     <!-- Bootstrap core JavaScript -->
     <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
