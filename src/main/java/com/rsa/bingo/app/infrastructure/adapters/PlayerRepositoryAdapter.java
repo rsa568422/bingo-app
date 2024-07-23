@@ -4,11 +4,9 @@ import com.rsa.bingo.app.infrastructure.mappers.PlayerMapper;
 import com.rsa.bingo.app.infrastructure.repositories.PlayerCrudRepository;
 import com.rsa.bingo.domain.models.Player;
 import com.rsa.bingo.domain.repositories.PlayerRepository;
-import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-@Repository
 public class PlayerRepositoryAdapter implements PlayerRepository {
 
     private final PlayerCrudRepository repository;

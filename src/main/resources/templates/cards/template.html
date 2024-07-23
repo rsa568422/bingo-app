@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<!-- style(customization) -->
+<style th:fragment="style" th:inline="css">
+    .primaryColor-border {
+        border-color: rgb([[${customization.primaryRGB[0]}]],[[${customization.primaryRGB[1]}]],[[${customization.primaryRGB[2]}]]);
+        border-style: solid;
+        border-width: medium;
+    }
+    .primaryColor-text {
+        color: rgb([[${customization.primaryRGB[0]}]],[[${customization.primaryRGB[1]}]],[[${customization.primaryRGB[2]}]]);
+    }
+    .primaryColor-background {
+        background-color: white;
+    }
+    .secondaryColor-background {
+        background-color: rgb([[${customization.secondaryRGB[0]}]],[[${customization.secondaryRGB[1]}]],[[${customization.secondaryRGB[2]}]]);
+    }
+</style>
+
+<!-- style(customizations) -->
+<style th:inline="css" th:each="savedStyle:${customizations}">
+    .primaryColor-border-[[${savedStyle.primaryName + '-' + savedStyle.secondaryName}]] {
+        border-color: rgb([[${savedStyle.primaryRGB[0]}]],[[${savedStyle.primaryRGB[1]}]],[[${savedStyle.primaryRGB[2]}]]);
+        border-style: solid;
+        border-width: medium;
+    }
+    .primaryColor-text-[[${savedStyle.primaryName + '-' + savedStyle.secondaryName}]] {
+        color: rgb([[${savedStyle.primaryRGB[0]}]],[[${savedStyle.primaryRGB[1]}]],[[${savedStyle.primaryRGB[2]}]]);
+    }
+    .primaryColor-background-[[${savedStyle.primaryName + '-' + savedStyle.secondaryName}]] {
+        background-color: white;
+    }
+    .secondaryColor-background-[[${savedStyle.primaryName + '-' + savedStyle.secondaryName}]] {
+        background-color: rgb([[${savedStyle.secondaryRGB[0]}]],[[${savedStyle.secondaryRGB[1]}]],[[${savedStyle.secondaryRGB[2]}]]);
+    }
+</style>
+
+<!-- view(card) -->
+<div th:fragment="view">
+    <div class="row" th:each="row:${card.values}">
+        <div th:each="column:${row}"
+             th:class="${column != null} ? 'col primaryColor-border primaryColor-background text-center fs-3' : 'col primaryColor-border secondaryColor-background'">
+            <p></p>
+            <span th:class="${column != null} ? 'primaryColor-text primaryColor-background' : 'secondaryColor-background'"
+                  th:text="${column != null} ? ${column} : '&nbsp;'"></span>
+            <p></p>
+        </div>
+    </div>
+</div>
+
+<!-- fill(card) -->
+<div th:fragment="fill">
+    <div class="row">
+        <div class="input-group">
+            <input th:field=${card.values[0][0]} type="number" min="1" max="99" class="form-control primaryColor-border primaryColor-background text-center fs-3"/>
+            <input th:field=${card.values[0][1]} type="number" min="1" max="99" class="form-control primaryColor-border primaryColor-background text-center fs-3"/>
+            <input th:field=${card.values[0][2]} type="number" min="1" max="99" class="form-control primaryColor-border primaryColor-background text-center fs-3"/>
+            <input th:field=${card.values[0][3]} type="number" min="1" max="99" class="form-control primaryColor-border primaryColor-background text-center fs-3"/>
+            <input th:field=${card.values[0][4]} type="number" min="1" max="99" class="form-control primaryColor-border primaryColor-background text-center fs-3"/>
+            <input th:field=${card.values[0][5]} type="number" min="1" max="99" class="form-control primaryColor-border primaryColor-background text-center fs-3"/>
+            <input th:field=${card.values[0][6]} type="number" min="1" max="99" class="form-control primaryColor-border primaryColor-background text-center fs-3"/>
+            <input th:field=${card.values[0][7]} type="number" min="1" max="99" class="form-control primaryColor-border primaryColor-background text-center fs-3"/>
+            <input th:field=${card.values[0][8]} type="number" min="1" max="99" class="form-control primaryColor-border primaryColor-background text-center fs-3"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-group">
+            <input th:field=${card.values[1][0]} type="number" min="1" max="99" class="form-control primaryColor-border primaryColor-background text-center fs-3"/>
+            <input th:field=${card.values[1][1]} type="number" min="1" max="99" class="form-control primaryColor-border primaryColor-background text-center fs-3"/>
+            <input th:field=${card.values[1][2]} type="number" min="1" max="99" class="form-control primaryColor-border primaryColor-background text-center fs-3"/>
+            <input th:field=${card.values[1][3]} type="number" min="1" max="99" class="form-control primaryColor-border primaryColor-background text-center fs-3"/>
+            <input th:field=${card.values[1][4]} type="number" min="1" max="99" class="form-control primaryColor-border primaryColor-background text-center fs-3"/>
+            <input th:field=${card.values[1][5]} type="number" min="1" max="99" class="form-control primaryColor-border primaryColor-background text-center fs-3"/>
+            <input th:field=${card.values[1][6]} type="number" min="1" max="99" class="form-control primaryColor-border primaryColor-background text-center fs-3"/>
+            <input th:field=${card.values[1][7]} type="number" min="1" max="99" class="form-control primaryColor-border primaryColor-background text-center fs-3"/>
+            <input th:field=${card.values[1][8]} type="number" min="1" max="99" class="form-control primaryColor-border primaryColor-background text-center fs-3"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-group">
+            <input th:field=${card.values[2][0]} type="number" min="1" max="99" class="form-control primaryColor-border primaryColor-background text-center fs-3"/>
+            <input th:field=${card.values[2][1]} type="number" min="1" max="99" class="form-control primaryColor-border primaryColor-background text-center fs-3"/>
+            <input th:field=${card.values[2][2]} type="number" min="1" max="99" class="form-control primaryColor-border primaryColor-background text-center fs-3"/>
+            <input th:field=${card.values[2][3]} type="number" min="1" max="99" class="form-control primaryColor-border primaryColor-background text-center fs-3"/>
+            <input th:field=${card.values[2][4]} type="number" min="1" max="99" class="form-control primaryColor-border primaryColor-background text-center fs-3"/>
+            <input th:field=${card.values[2][5]} type="number" min="1" max="99" class="form-control primaryColor-border primaryColor-background text-center fs-3"/>
+            <input th:field=${card.values[2][6]} type="number" min="1" max="99" class="form-control primaryColor-border primaryColor-background text-center fs-3"/>
+            <input th:field=${card.values[2][7]} type="number" min="1" max="99" class="form-control primaryColor-border primaryColor-background text-center fs-3"/>
+            <input th:field=${card.values[2][8]} type="number" min="1" max="99" class="form-control primaryColor-border primaryColor-background text-center fs-3"/>
+        </div>
+    </div>
+</div>
+
+<!-- list(customizations) -->
+<div th:fragment="list" class="card text-bg-dark mb-3 text-center">
+    <div class="card-header">
+        <h2 class="text-success">Personalizaciones</h2>
+    </div>
+    <div class="card-body">
+        <div class="card-text">
+            <a th:each="savedCustomization:${customizations}" th:href="@{/card/{id}/{primary}/{secondary} (id = ${savedCustomization.cardId}, primary = ${savedCustomization.primaryName}, secondary = ${savedCustomization.secondaryName})}"
+               class="link-underline link-underline-opacity-0">
+                <div class="row mt-2">
+                    <div class="col-3 align-center">
+                        <div th:hidden="${!savedCustomization.equals(customization)}" class="badge bg-success mt-2 fs-5">&nbsp;</div>
+                    </div>
+                    <div th:class="'col-4 primaryColor-border-' + ${savedCustomization.primaryName} + '-' + ${savedCustomization.secondaryName} + ' primaryColor-background-' + ${savedCustomization.primaryName} + '-' + ${savedCustomization.secondaryName} + ' primaryColor-text-' + ${savedCustomization.primaryName} + '-' + ${savedCustomization.secondaryName} + ' text-center fs-3'">
+                        N
+                    </div>
+                    <div th:class="'col-4 primaryColor-border-' + ${savedCustomization.primaryName} + '-' + ${savedCustomization.secondaryName} + ' secondaryColor-background-' + ${savedCustomization.primaryName} + '-' + ${savedCustomization.secondaryName}">
+                        &nbsp;
+                    </div>
+                    <div class="col-1"></div>
+                </div>
+            </a>
+        </div>
+        <div class="card-footer">
+            <div class="row" style="padding-left: 4%; padding-right: 4%;">
+                <a th:href="@{/card/customize/{id} (id = ${card.id})}" class="btn btn-outline-success">Nueva personalización</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+</html>

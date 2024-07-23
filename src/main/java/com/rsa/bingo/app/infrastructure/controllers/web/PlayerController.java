@@ -1,26 +1,23 @@
 package com.rsa.bingo.app.infrastructure.controllers.web;
 
-import com.rsa.bingo.domain.services.CardService;
-import com.rsa.bingo.domain.services.PlayerService;
+import com.rsa.bingo.app.application.services.WebCardService;
+import com.rsa.bingo.app.application.services.WebPlayerService;
+import com.rsa.bingo.app.infrastructure.dtos.PlayerDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import static com.rsa.bingo.app.infrastructure.Constants.CARDS;
-import static com.rsa.bingo.app.infrastructure.Constants.PLAYER;
-import static com.rsa.bingo.app.infrastructure.Constants.PLAYERS;
+import static com.rsa.bingo.app.infrastructure.Constants.*;
 
 @Controller
 @RequestMapping("/player")
 public class PlayerController {
 
-    private final PlayerService playerService;
+    private final WebPlayerService playerService;
 
-    private final CardService cardService;
+    private final WebCardService cardService;
 
-    public PlayerController(PlayerService playerService, CardService cardService) {
+    public PlayerController(WebPlayerService playerService, WebCardService cardService) {
         this.playerService = playerService;
         this.cardService = cardService;
     }
@@ -33,9 +30,27 @@ public class PlayerController {
 
     @GetMapping("/{id}")
     public String get(@PathVariable Integer id, Model model) {
-        var player = playerService.findById(id).orElseThrow(() -> new VerifyError("Player not found"));
-        model.addAttribute(PLAYER, player);
-        model.addAttribute(CARDS, cardService.findByPlayerId(player.getId()));
+        model.addAttribute(PLAYER, playerService.findById(id));
+        model.addAttribute(CARDS, cardService.findByPlayerId(id));
+        model.addAttribute(CUSTOMIZATION, defaultCustomization(null));
         return "players/view";
+    }
+
+    @GetMapping("/create")
+    public String create(Model model) {
+        model.addAttribute(PLAYER, new PlayerDTO());
+        return "players/create";
+    }
+
+    @PostMapping("/{id}")
+    public String delete(@PathVariable Integer id) {
+        playerService.delete(id);
+        return "redirect:/player";
+    }
+
+    @PostMapping
+    public String save(PlayerDTO player) {
+        player = playerService.save(player);
+        return String.format("redirect:/player/%d", player.getId());
     }
 }

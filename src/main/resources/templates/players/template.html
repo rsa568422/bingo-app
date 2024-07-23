@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<!-- list(players) -->
+<table th:fragment="list" class="table align-middle caption-top">
+    <caption>
+        <p class="h1 text-center text-black">Jugadores</p>
+    </caption>
+    <thead class="table-success">
+        <tr class="row">
+            <th scope="col" class="align-middle col-1">#</th>
+            <th scope="col" class="align-middle col-9">Nombre</th>
+            <th scope="col" class="align-middle col-2"><a type="button" class="btn btn-success" th:href="@{/player/create}">Nuevo jugador</a></th>
+        </tr>
+    </thead>
+    <tbody class="table-group-divider">
+        <tr th:each="player:${players}" class="row">
+            <th scope="row" class="align-middle col-1">
+                <a th:href="@{/player/{id} (id = ${player.id})}" th:text="${player.id}"
+                   class=" text-success link-underline link-underline-opacity-0"></a>
+            </th>
+            <td class="align-middle col-9">
+                <a th:href="@{/player/{id} (id = ${player.id})}" th:text="${player.name}"
+                   class="link-offset-2 link-underline link-underline-opacity-0 text-black"></a>
+            </td>
+            <td class="align-middle col-2">
+                <form th:action="@{player/{id} (id = ${player.id})}" method="post">
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                </form>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<!-- view(player) -->
+<div th:fragment="view" class="card text-bg-dark mb-3 text-center" style="max-width: 18rem;">
+    <div class="card-header">
+        <h1 class="text-success">Jugador</h1>
+    </div>
+    <div class="card-body">
+        <h5 class="card-title" th:text="${player.name}"></h5>
+        <p class="card-text">ID: <span th:text="${player.id}"></span></p>
+    </div>
+</div>
+
+<!-- create(player) -->
+<div th:fragment="create" class="card text-bg-dark mb-3 text-center" style="max-width: 18rem;">
+    <div class="card-header">
+        <h1 class="text-success">Jugador</h1>
+    </div>
+    <div class="card-body">
+        <form th:action="@{/player}" method="post" th:object="${player}">
+            <label for="name">Nombre</label>
+            <input name="name" id="name" th:field=${player.name} type="text"
+                   class="form-control primaryColor-border primaryColor-background text-center fs-3"/>
+            <button class="btn btn-success mt-3" type="submit">Guardar</button>
+        </form>
+    </div>
+</div>
+
+<!-- cards(cards) -->
+<div th:fragment="cards">
+    <div class="row mb-2" th:each="card:${cards}">
+        <div class="col-1">
+            <form th:action="@{/card/{id} (id = ${card.id})}" method="post">
+                <button type="submit" class="btn btn-danger mt-1">Eliminar</button>
+            </form>
+        </div>
+        <div class="col-1"></div>
+        <div class="col-10">
+            <a th:href="@{/card/{id} (id = ${card.id})}" class="link-underline link-underline-opacity-0">
+                <div th:insert="~{cards/template::view}"></div>
+            </a>
+        </div>
+    </div>
+</div>
+
+</html>
