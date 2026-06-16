@@ -11,6 +11,8 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.ui.ConcurrentModel;
 import org.springframework.ui.Model;
+import org.springframework.validation.BeanPropertyBindingResult;
+import org.springframework.validation.BindingResult;
 
 import java.util.List;
 
@@ -78,12 +80,27 @@ class PlayerControllerTest {
     }
 
     @Test
-    void save_redirectsToPlayerView() {
+    void save_withValidPlayer_redirectsToPlayerView() {
         var savedPlayer = TestData.playerDTO();
         when(playerService.save(any(PlayerDTO.class))).thenReturn(savedPlayer);
 
-        String view = controller.save(new PlayerDTO(null, "NewPlayer"));
+        var player = new PlayerDTO(null, "NewPlayer");
+        BindingResult bindingResult = new BeanPropertyBindingResult(player, "player");
+
+        String view = controller.save(player, bindingResult, model);
 
         assertThat(view).isEqualTo("redirect:/player/1");
+    }
+
+    @Test
+    void save_withValidationErrors_returnsCreateView() {
+        var player = new PlayerDTO(null, "");
+        BindingResult bindingResult = new BeanPropertyBindingResult(player, "player");
+        bindingResult.rejectValue("name", "NotBlank", "El nombre no puede estar vacío");
+
+        String view = controller.save(player, bindingResult, model);
+
+        assertThat(view).isEqualTo("players/create");
+        assertThat(model.getAttribute("player")).isEqualTo(player);
     }
 }
