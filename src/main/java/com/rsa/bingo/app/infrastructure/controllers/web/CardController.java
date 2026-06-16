@@ -81,11 +81,10 @@ public class CardController {
             return String.format("redirect:/player/%s", card.getPlayerId());
         } catch (VerifyError error) {
             model.addAttribute("message", error.getMessage());
-            return "cards/builder";
-        } finally {
             model.addAttribute(CARD, card);
             model.addAttribute(CUSTOMIZATION, defaultCustomization(card.getId()));
             model.addAttribute(COLORS, Color.values());
+            return "cards/builder";
         }
     }
 
