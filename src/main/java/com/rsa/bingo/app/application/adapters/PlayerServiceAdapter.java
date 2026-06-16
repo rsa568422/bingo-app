@@ -2,8 +2,8 @@ package com.rsa.bingo.app.application.adapters;
 
 import com.rsa.bingo.app.application.services.WebPlayerService;
 import com.rsa.bingo.app.infrastructure.dtos.PlayerDTO;
+import com.rsa.bingo.app.infrastructure.utils.IterableMapper;
 import com.rsa.bingo.domain.services.PlayerService;
-import org.apache.commons.collections4.IterableUtils;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.NoSuchElementException;
@@ -18,7 +18,7 @@ public class PlayerServiceAdapter implements WebPlayerService {
 
     @Override
     public Iterable<PlayerDTO> findAll() {
-        return IterableUtils.toList(service.findAll()).stream().map(PlayerDTO::valueOf).toList();
+        return IterableMapper.mapToList(service.findAll(), PlayerDTO::valueOf);
     }
 
     @Override
@@ -29,7 +29,7 @@ public class PlayerServiceAdapter implements WebPlayerService {
 
     @Override
     public Iterable<PlayerDTO> findByName(String name) {
-        return IterableUtils.toList(service.findByName(name)).stream().map(PlayerDTO::valueOf).toList();
+        return IterableMapper.mapToList(service.findByName(name), PlayerDTO::valueOf);
     }
 
     @Override

@@ -2,8 +2,8 @@ package com.rsa.bingo.app.infrastructure.mappers.defaults;
 
 import com.rsa.bingo.app.infrastructure.entities.PlayerEntity;
 import com.rsa.bingo.app.infrastructure.mappers.PlayerMapper;
+import com.rsa.bingo.app.infrastructure.utils.IterableMapper;
 import com.rsa.bingo.domain.models.Player;
-import org.apache.commons.collections4.IterableUtils;
 
 public class DefaultPlayerMapper implements PlayerMapper {
 
@@ -14,7 +14,7 @@ public class DefaultPlayerMapper implements PlayerMapper {
 
     @Override
     public Iterable<Player> toPlayers(Iterable<PlayerEntity> playerEntities) {
-        return IterableUtils.toList(playerEntities).stream().map(this::toPlayer).toList();
+        return IterableMapper.mapToList(playerEntities, this::toPlayer);
     }
 
     @Override
