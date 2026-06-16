@@ -3,8 +3,9 @@ package com.rsa.bingo.app.infrastructure.mappers.defaults;
 import com.rsa.bingo.app.infrastructure.entities.CardEntity;
 import com.rsa.bingo.app.infrastructure.mappers.CardMapper;
 import com.rsa.bingo.app.infrastructure.mappers.PlayerMapper;
+import com.rsa.bingo.app.infrastructure.utils.CardValuesDecoder;
+import com.rsa.bingo.app.infrastructure.utils.IterableMapper;
 import com.rsa.bingo.domain.models.Card;
-import org.apache.commons.collections4.IterableUtils;
 import org.json.JSONArray;
 
 public class DefaultCardMapper implements CardMapper {
@@ -17,17 +18,13 @@ public class DefaultCardMapper implements CardMapper {
 
     @Override
     public Card toCard(CardEntity cardEntity) {
-        var json = new JSONArray(cardEntity.getValues());
-        var values = new Integer[3][9];
-        for (int i = 0; i < 3; i++)
-            for (int j = 0; j < 9; j++)
-                values[i][j] = json.getJSONArray(i).optIntegerObject(j, null);
+        var values = CardValuesDecoder.decode(cardEntity.getValues());
         return new Card(cardEntity.getId(), values, playerMapper.toPlayer(cardEntity.getPlayer()));
     }
 
     @Override
     public Iterable<Card> toCards(Iterable<CardEntity> cardEntities) {
-        return IterableUtils.toList(cardEntities).stream().map(this::toCard).toList();
+        return IterableMapper.mapToList(cardEntities, this::toCard);
     }
 
     @Override

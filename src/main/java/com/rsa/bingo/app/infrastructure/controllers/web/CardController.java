@@ -29,36 +29,24 @@ public class CardController {
 
     @GetMapping("/{id}")
     public String get(@PathVariable Integer id, Model model) {
-        model.addAttribute(CARD, cardService.findById(id));
-        model.addAttribute(CUSTOMIZATIONS, customizationService.findByCardId(id));
-        model.addAttribute(CUSTOMIZATION, defaultCustomization(id));
-        return "cards/view";
+        return prepareCardView(id, defaultCustomization(id), model);
     }
 
     @GetMapping("/{id}/{primary}/{secondary}")
     public String apply(@PathVariable Integer id, @PathVariable String primary,
                             @PathVariable String secondary, Model model) {
-        model.addAttribute(CARD, cardService.findById(id));
-        model.addAttribute(CUSTOMIZATIONS, customizationService.findByCardId(id));
-        model.addAttribute(CUSTOMIZATION, new CustomizationDTO(id, Color.valueOf(primary), Color.valueOf(secondary)));
-        return "cards/view";
+        return prepareCardView(id, new CustomizationDTO(id, Color.valueOf(primary), Color.valueOf(secondary)), model);
     }
 
     @GetMapping("/customize/{id}")
     public String customize(@PathVariable Integer id, Model model) {
-        model.addAttribute(CARD, cardService.findById(id));
-        model.addAttribute(CUSTOMIZATION, defaultCustomization(id));
-        model.addAttribute(COLORS, Color.values());
-        return "cards/customizer";
+        return prepareCustomizerView(id, defaultCustomization(id), model);
     }
 
     @GetMapping("/customize/{id}/{primary}/{secondary}")
     public String customize(@PathVariable Integer id, @PathVariable String primary,
                             @PathVariable String secondary, Model model) {
-        model.addAttribute(CARD, cardService.findById(id));
-        model.addAttribute(CUSTOMIZATION, new CustomizationDTO(id, Color.valueOf(primary), Color.valueOf(secondary)));
-        model.addAttribute(COLORS, Color.values());
-        return "cards/customizer";
+        return prepareCustomizerView(id, new CustomizationDTO(id, Color.valueOf(primary), Color.valueOf(secondary)), model);
     }
 
     @PostMapping("/customize")
@@ -94,5 +82,19 @@ public class CardController {
         var card = cardService.findById(id);
         cardService.delete(id);
         return String.format("redirect:/player/%d", card.getPlayerId());
+    }
+
+    private String prepareCardView(Integer id, CustomizationDTO customization, Model model) {
+        model.addAttribute(CARD, cardService.findById(id));
+        model.addAttribute(CUSTOMIZATIONS, customizationService.findByCardId(id));
+        model.addAttribute(CUSTOMIZATION, customization);
+        return "cards/view";
+    }
+
+    private String prepareCustomizerView(Integer id, CustomizationDTO customization, Model model) {
+        model.addAttribute(CARD, cardService.findById(id));
+        model.addAttribute(CUSTOMIZATION, customization);
+        model.addAttribute(COLORS, Color.values());
+        return "cards/customizer";
     }
 }

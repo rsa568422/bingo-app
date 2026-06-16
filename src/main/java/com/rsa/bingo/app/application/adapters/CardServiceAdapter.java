@@ -3,8 +3,8 @@ package com.rsa.bingo.app.application.adapters;
 import com.rsa.bingo.app.application.services.WebCardService;
 import com.rsa.bingo.app.infrastructure.dtos.CardDTO;
 import com.rsa.bingo.app.infrastructure.dtos.CustomizationDTO;
+import com.rsa.bingo.app.infrastructure.utils.IterableMapper;
 import com.rsa.bingo.domain.services.CardService;
-import org.apache.commons.collections4.IterableUtils;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.NoSuchElementException;
@@ -25,7 +25,7 @@ public class CardServiceAdapter implements WebCardService {
 
     @Override
     public Iterable<CardDTO> findByPlayerId(Integer playerId) {
-        return IterableUtils.toList(service.findByPlayerId(playerId)).stream().map(CardDTO::valueOf).toList();
+        return IterableMapper.mapToList(service.findByPlayerId(playerId), CardDTO::valueOf);
     }
 
     @Override
