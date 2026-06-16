@@ -4,10 +4,10 @@ import com.rsa.bingo.app.TestData;
 import com.rsa.bingo.app.application.services.WebCardService;
 import com.rsa.bingo.app.infrastructure.dtos.CardDTO;
 import com.rsa.bingo.app.infrastructure.dtos.CustomizationDTO;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -22,19 +22,15 @@ class CardRestControllerTest {
     @Mock
     private WebCardService cardService;
 
+    @InjectMocks
     private CardRestController controller;
-
-    @BeforeEach
-    void setUp() {
-        controller = new CardRestController(cardService);
-    }
 
     @Test
     void build_delegatesToServiceWithCorrectParams() {
-        byte[] expected = new byte[]{1, 2, 3};
+        var expected = new byte[]{1, 2, 3};
         when(cardService.toBytes(any(CardDTO.class), any(CustomizationDTO.class))).thenReturn(expected);
 
-        byte[] result = controller.build(TestData.valuesJson(), "BLACK", "GREY_50_PERCENT");
+        var result = controller.build(TestData.valuesJson(), "BLACK", "GREY_50_PERCENT");
 
         assertThat(result).isEqualTo(expected);
 

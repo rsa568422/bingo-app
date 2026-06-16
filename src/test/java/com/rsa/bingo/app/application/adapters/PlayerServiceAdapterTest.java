@@ -1,12 +1,11 @@
 package com.rsa.bingo.app.application.adapters;
 
 import com.rsa.bingo.app.TestData;
-import com.rsa.bingo.app.infrastructure.dtos.PlayerDTO;
 import com.rsa.bingo.domain.models.Player;
 import com.rsa.bingo.domain.services.PlayerService;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -26,18 +25,14 @@ class PlayerServiceAdapterTest {
     @Mock
     private PlayerService service;
 
+    @InjectMocks
     private PlayerServiceAdapter adapter;
-
-    @BeforeEach
-    void setUp() {
-        adapter = new PlayerServiceAdapter(service);
-    }
 
     @Test
     void findAll_returnsDTOList() {
         when(service.findAll()).thenReturn(List.of(TestData.player()));
 
-        Iterable<PlayerDTO> result = adapter.findAll();
+        var result = adapter.findAll();
 
         assertThat(result).hasSize(1);
         assertThat(result.iterator().next().getId()).isEqualTo(1);
@@ -47,7 +42,7 @@ class PlayerServiceAdapterTest {
     void findById_whenFound_returnsDTO() {
         when(service.findById(1)).thenReturn(Optional.of(TestData.player()));
 
-        PlayerDTO result = adapter.findById(1);
+        var result = adapter.findById(1);
 
         assertThat(result.getId()).isEqualTo(1);
         assertThat(result.getName()).isEqualTo("TestPlayer");
@@ -66,7 +61,7 @@ class PlayerServiceAdapterTest {
     void findByName_returnsDTOList() {
         when(service.findByName("TestPlayer")).thenReturn(List.of(TestData.player()));
 
-        Iterable<PlayerDTO> result = adapter.findByName("TestPlayer");
+        var result = adapter.findByName("TestPlayer");
 
         assertThat(result).hasSize(1);
     }
@@ -76,7 +71,7 @@ class PlayerServiceAdapterTest {
         var player = TestData.player();
         when(service.save(any(Player.class))).thenReturn(player);
 
-        PlayerDTO result = adapter.save(TestData.playerDTO());
+        var result = adapter.save(TestData.playerDTO());
 
         assertThat(result.getId()).isEqualTo(1);
         assertThat(result.getName()).isEqualTo("TestPlayer");

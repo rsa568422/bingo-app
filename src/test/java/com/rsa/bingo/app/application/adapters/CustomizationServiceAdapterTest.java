@@ -1,13 +1,12 @@
 package com.rsa.bingo.app.application.adapters;
 
 import com.rsa.bingo.app.TestData;
-import com.rsa.bingo.app.infrastructure.dtos.CustomizationDTO;
 import com.rsa.bingo.domain.models.Color;
 import com.rsa.bingo.domain.models.Customization;
 import com.rsa.bingo.domain.services.CustomizationService;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -25,22 +24,18 @@ class CustomizationServiceAdapterTest {
     @Mock
     private CustomizationService service;
 
+    @InjectMocks
     private CustomizationServiceAdapter adapter;
-
-    @BeforeEach
-    void setUp() {
-        adapter = new CustomizationServiceAdapter(service);
-    }
 
     @Test
     void findByCardId_addsDefaultWhenNotPresent() {
         var customization = new Customization(1, Color.RED, Color.BLUE);
         when(service.findByCardId(1)).thenReturn(List.of(customization));
 
-        Iterable<CustomizationDTO> result = adapter.findByCardId(1);
+        var result = adapter.findByCardId(1);
 
         assertThat(result).hasSize(2);
-        var list = new ArrayList<CustomizationDTO>();
+        var list = new ArrayList<com.rsa.bingo.app.infrastructure.dtos.CustomizationDTO>();
         result.forEach(list::add);
         assertThat(list.get(0).getPrimaryName()).isEqualTo(Color.BLACK.getName());
         assertThat(list.get(0).getSecondaryName()).isEqualTo(Color.GREY_50_PERCENT.getName());
@@ -51,7 +46,7 @@ class CustomizationServiceAdapterTest {
         var defaultCustomization = new Customization(1, Color.BLACK, Color.GREY_50_PERCENT);
         when(service.findByCardId(1)).thenReturn(List.of(defaultCustomization));
 
-        Iterable<CustomizationDTO> result = adapter.findByCardId(1);
+        var result = adapter.findByCardId(1);
 
         assertThat(result).hasSize(1);
     }
@@ -61,7 +56,7 @@ class CustomizationServiceAdapterTest {
         var customization = TestData.customization();
         when(service.save(any(Customization.class))).thenReturn(customization);
 
-        CustomizationDTO result = adapter.save(TestData.customizationDTO());
+        var result = adapter.save(TestData.customizationDTO());
 
         assertThat(result.getCardId()).isEqualTo(1);
         assertThat(result.getPrimaryName()).isEqualTo(Color.BLACK.getName());

@@ -1,12 +1,11 @@
 package com.rsa.bingo.app.application.adapters;
 
 import com.rsa.bingo.app.TestData;
-import com.rsa.bingo.app.infrastructure.dtos.CardDTO;
 import com.rsa.bingo.domain.models.Card;
 import com.rsa.bingo.domain.services.CardService;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -26,18 +25,14 @@ class CardServiceAdapterTest {
     @Mock
     private CardService service;
 
+    @InjectMocks
     private CardServiceAdapter adapter;
-
-    @BeforeEach
-    void setUp() {
-        adapter = new CardServiceAdapter(service);
-    }
 
     @Test
     void findById_whenFound_returnsDTO() {
         when(service.findById(1)).thenReturn(Optional.of(TestData.card()));
 
-        CardDTO result = adapter.findById(1);
+        var result = adapter.findById(1);
 
         assertThat(result.getId()).isEqualTo(1);
         assertThat(result.getValues()).isDeepEqualTo(TestData.VALUES);
@@ -56,7 +51,7 @@ class CardServiceAdapterTest {
     void findByPlayerId_returnsDTOList() {
         when(service.findByPlayerId(1)).thenReturn(List.of(TestData.card()));
 
-        Iterable<CardDTO> result = adapter.findByPlayerId(1);
+        var result = adapter.findByPlayerId(1);
 
         assertThat(result).hasSize(1);
     }
@@ -65,7 +60,7 @@ class CardServiceAdapterTest {
     void save_delegatesAndReturnsDTO() {
         when(service.save(any(Card.class))).thenReturn(TestData.card());
 
-        CardDTO result = adapter.save(TestData.cardDTO());
+        var result = adapter.save(TestData.cardDTO());
 
         assertThat(result.getId()).isEqualTo(1);
     }
@@ -78,10 +73,10 @@ class CardServiceAdapterTest {
 
     @Test
     void toBytes_delegatesToService() {
-        byte[] expected = new byte[]{1, 2, 3};
+        var expected = new byte[]{1, 2, 3};
         when(service.toBytes(any(Card.class), any())).thenReturn(expected);
 
-        byte[] result = adapter.toBytes(TestData.cardDTO(), TestData.customizationDTO());
+        var result = adapter.toBytes(TestData.cardDTO(), TestData.customizationDTO());
 
         assertThat(result).isEqualTo(expected);
     }

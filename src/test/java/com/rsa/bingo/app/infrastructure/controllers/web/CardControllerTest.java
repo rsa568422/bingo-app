@@ -9,6 +9,7 @@ import com.rsa.bingo.domain.models.Color;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.ui.ConcurrentModel;
@@ -30,12 +31,13 @@ class CardControllerTest {
     @Mock
     private WebCustomizationService customizationService;
 
+    @InjectMocks
     private CardController controller;
+
     private Model model;
 
     @BeforeEach
     void setUp() {
-        controller = new CardController(cardService, customizationService);
         model = new ConcurrentModel();
     }
 
@@ -44,7 +46,7 @@ class CardControllerTest {
         when(cardService.findById(1)).thenReturn(TestData.cardDTO());
         when(customizationService.findByCardId(1)).thenReturn(List.of(TestData.customizationDTO()));
 
-        String view = controller.get(1, model);
+        var view = controller.get(1, model);
 
         assertThat(view).isEqualTo("cards/view");
         assertThat(model.getAttribute("card")).isNotNull();
@@ -57,7 +59,7 @@ class CardControllerTest {
         when(cardService.findById(1)).thenReturn(TestData.cardDTO());
         when(customizationService.findByCardId(1)).thenReturn(List.of(TestData.customizationDTO()));
 
-        String view = controller.apply(1, "RED", "BLUE", model);
+        var view = controller.apply(1, "RED", "BLUE", model);
 
         assertThat(view).isEqualTo("cards/view");
         var customization = (CustomizationDTO) model.getAttribute("customization");
@@ -70,7 +72,7 @@ class CardControllerTest {
     void customize_addsCardAndColorsToModel() {
         when(cardService.findById(1)).thenReturn(TestData.cardDTO());
 
-        String view = controller.customize(1, model);
+        var view = controller.customize(1, model);
 
         assertThat(view).isEqualTo("cards/customizer");
         assertThat(model.getAttribute("card")).isNotNull();
@@ -82,7 +84,7 @@ class CardControllerTest {
     void customizeWithColors_setsSpecificCustomization() {
         when(cardService.findById(1)).thenReturn(TestData.cardDTO());
 
-        String view = controller.customize(1, "RED", "BLUE", model);
+        var view = controller.customize(1, "RED", "BLUE", model);
 
         assertThat(view).isEqualTo("cards/customizer");
         var customization = (CustomizationDTO) model.getAttribute("customization");
@@ -94,7 +96,7 @@ class CardControllerTest {
     void saveCustomization_redirectsToCardView() {
         var dto = TestData.customizationDTO();
 
-        String view = controller.save(dto);
+        var view = controller.save(dto);
 
         assertThat(view).isEqualTo("redirect:/card/1");
         verify(customizationService).save(dto);
@@ -102,7 +104,7 @@ class CardControllerTest {
 
     @Test
     void builder_addsEmptyCardToModel() {
-        String view = controller.builder(1, model);
+        var view = controller.builder(1, model);
 
         assertThat(view).isEqualTo("cards/builder");
         assertThat(model.getAttribute("card")).isNotNull();
@@ -115,7 +117,7 @@ class CardControllerTest {
         when(cardService.save(any(CardDTO.class))).thenReturn(savedCard);
 
         var card = TestData.cardDTO();
-        String view = controller.fill(card, model);
+        var view = controller.fill(card, model);
 
         assertThat(view).isEqualTo("redirect:/player/1");
     }
@@ -125,7 +127,7 @@ class CardControllerTest {
         when(cardService.save(any(CardDTO.class))).thenThrow(new VerifyError("Invalid card"));
 
         var card = new CardDTO(null, new Integer[3][9], 1, "TestPlayer");
-        String view = controller.fill(card, model);
+        var view = controller.fill(card, model);
 
         assertThat(view).isEqualTo("cards/builder");
         assertThat(model.getAttribute("message")).isEqualTo("Invalid card");
@@ -136,7 +138,7 @@ class CardControllerTest {
         var card = TestData.cardDTO();
         when(cardService.findById(1)).thenReturn(card);
 
-        String view = controller.delete(1);
+        var view = controller.delete(1);
 
         assertThat(view).isEqualTo("redirect:/player/1");
         verify(cardService).delete(1);

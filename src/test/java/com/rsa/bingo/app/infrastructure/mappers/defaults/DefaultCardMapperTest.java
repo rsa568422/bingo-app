@@ -1,9 +1,6 @@
 package com.rsa.bingo.app.infrastructure.mappers.defaults;
 
 import com.rsa.bingo.app.TestData;
-import com.rsa.bingo.app.infrastructure.entities.CardEntity;
-import com.rsa.bingo.domain.models.Card;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
@@ -13,17 +10,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class DefaultCardMapperTest {
 
-    private DefaultCardMapper mapper;
-
-    @BeforeEach
-    void setUp() {
-        mapper = new DefaultCardMapper(new DefaultPlayerMapper());
-    }
+    private final DefaultCardMapper mapper = new DefaultCardMapper(new DefaultPlayerMapper());
 
     @Test
     void toCard_convertsEntityToDomain() {
         var entity = TestData.cardEntity();
-        Card card = mapper.toCard(entity);
+        var card = mapper.toCard(entity);
         assertThat(card.getId()).isEqualTo(entity.getId());
         assertThat(card.getValues()).isDeepEqualTo(TestData.VALUES);
         assertThat(card.getPlayer().getId()).isEqualTo(entity.getPlayer().getId());
@@ -32,21 +24,21 @@ class DefaultCardMapperTest {
 
     @Test
     void toCards_convertsMultipleEntities() {
-        List<CardEntity> entities = List.of(TestData.cardEntity());
-        Iterable<Card> cards = mapper.toCards(entities);
+        var entities = List.of(TestData.cardEntity());
+        var cards = mapper.toCards(entities);
         assertThat(cards).hasSize(1);
     }
 
     @Test
     void toCards_emptyList_returnsEmpty() {
-        Iterable<Card> cards = mapper.toCards(Collections.emptyList());
+        var cards = mapper.toCards(Collections.emptyList());
         assertThat(cards).isEmpty();
     }
 
     @Test
     void toCardEntity_convertsDomainToEntity() {
         var card = TestData.card();
-        CardEntity entity = mapper.toCardEntity(card);
+        var entity = mapper.toCardEntity(card);
         assertThat(entity.getId()).isEqualTo(card.getId());
         assertThat(entity.getValues()).isNotBlank();
         assertThat(entity.getPlayer().getId()).isEqualTo(card.getPlayer().getId());

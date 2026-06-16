@@ -1,13 +1,11 @@
 package com.rsa.bingo.app.infrastructure.adapters;
 
 import com.rsa.bingo.app.TestData;
-import com.rsa.bingo.app.infrastructure.entities.CardEntity;
 import com.rsa.bingo.app.infrastructure.mappers.CardMapper;
 import com.rsa.bingo.app.infrastructure.repositories.CardCrudRepository;
-import com.rsa.bingo.domain.models.Card;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -28,12 +26,8 @@ class CardRepositoryAdapterTest {
     @Mock
     private CardMapper mapper;
 
+    @InjectMocks
     private CardRepositoryAdapter adapter;
-
-    @BeforeEach
-    void setUp() {
-        adapter = new CardRepositoryAdapter(repository, mapper);
-    }
 
     @Test
     void findById_whenFound_returnsMappedCard() {
@@ -42,7 +36,7 @@ class CardRepositoryAdapterTest {
         when(repository.findById(1)).thenReturn(Optional.of(entity));
         when(mapper.toCard(entity)).thenReturn(card);
 
-        Optional<Card> result = adapter.findById(1);
+        var result = adapter.findById(1);
 
         assertThat(result).isPresent().contains(card);
     }
@@ -51,7 +45,7 @@ class CardRepositoryAdapterTest {
     void findById_whenNotFound_returnsEmpty() {
         when(repository.findById(anyInt())).thenReturn(Optional.empty());
 
-        Optional<Card> result = adapter.findById(999);
+        var result = adapter.findById(999);
 
         assertThat(result).isEmpty();
     }
@@ -63,7 +57,7 @@ class CardRepositoryAdapterTest {
         when(repository.findByPlayerId(1)).thenReturn(entities);
         when(mapper.toCards(entities)).thenReturn(cards);
 
-        Iterable<Card> result = adapter.findByPlayerId(1);
+        var result = adapter.findByPlayerId(1);
 
         assertThat(result).isEqualTo(cards);
     }
@@ -76,7 +70,7 @@ class CardRepositoryAdapterTest {
         when(repository.save(entity)).thenReturn(entity);
         when(mapper.toCard(entity)).thenReturn(card);
 
-        Card result = adapter.save(card);
+        var result = adapter.save(card);
 
         assertThat(result).isEqualTo(card);
         verify(repository).save(entity);

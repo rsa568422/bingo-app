@@ -1,13 +1,11 @@
 package com.rsa.bingo.app.infrastructure.adapters;
 
 import com.rsa.bingo.app.TestData;
-import com.rsa.bingo.app.infrastructure.entities.PlayerEntity;
 import com.rsa.bingo.app.infrastructure.mappers.PlayerMapper;
 import com.rsa.bingo.app.infrastructure.repositories.PlayerCrudRepository;
-import com.rsa.bingo.domain.models.Player;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -29,12 +27,8 @@ class PlayerRepositoryAdapterTest {
     @Mock
     private PlayerMapper mapper;
 
+    @InjectMocks
     private PlayerRepositoryAdapter adapter;
-
-    @BeforeEach
-    void setUp() {
-        adapter = new PlayerRepositoryAdapter(repository, mapper);
-    }
 
     @Test
     void findAll_delegatesToRepositoryAndMapper() {
@@ -43,7 +37,7 @@ class PlayerRepositoryAdapterTest {
         when(repository.findAll()).thenReturn(entities);
         when(mapper.toPlayers(entities)).thenReturn(players);
 
-        Iterable<Player> result = adapter.findAll();
+        var result = adapter.findAll();
 
         assertThat(result).isEqualTo(players);
         verify(repository).findAll();
@@ -57,7 +51,7 @@ class PlayerRepositoryAdapterTest {
         when(repository.findById(1)).thenReturn(Optional.of(entity));
         when(mapper.toPlayer(entity)).thenReturn(player);
 
-        Optional<Player> result = adapter.findById(1);
+        var result = adapter.findById(1);
 
         assertThat(result).isPresent().contains(player);
     }
@@ -66,7 +60,7 @@ class PlayerRepositoryAdapterTest {
     void findById_whenNotFound_returnsEmpty() {
         when(repository.findById(anyInt())).thenReturn(Optional.empty());
 
-        Optional<Player> result = adapter.findById(999);
+        var result = adapter.findById(999);
 
         assertThat(result).isEmpty();
     }
@@ -78,7 +72,7 @@ class PlayerRepositoryAdapterTest {
         when(repository.findByName("TestPlayer")).thenReturn(entities);
         when(mapper.toPlayers(entities)).thenReturn(players);
 
-        Iterable<Player> result = adapter.findByName("TestPlayer");
+        var result = adapter.findByName("TestPlayer");
 
         assertThat(result).isEqualTo(players);
     }
@@ -91,7 +85,7 @@ class PlayerRepositoryAdapterTest {
         when(repository.save(entity)).thenReturn(entity);
         when(mapper.toPlayer(entity)).thenReturn(player);
 
-        Player result = adapter.save(player);
+        var result = adapter.save(player);
 
         assertThat(result).isEqualTo(player);
         verify(repository).save(entity);

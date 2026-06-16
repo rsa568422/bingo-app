@@ -1,14 +1,12 @@
 package com.rsa.bingo.app.infrastructure.adapters;
 
 import com.rsa.bingo.app.TestData;
-import com.rsa.bingo.app.infrastructure.entities.CustomizationEntity;
 import com.rsa.bingo.app.infrastructure.mappers.CustomizationMapper;
 import com.rsa.bingo.app.infrastructure.repositories.CustomizationCrudRepository;
 import com.rsa.bingo.domain.models.Color;
-import com.rsa.bingo.domain.models.Customization;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -27,12 +25,8 @@ class CustomizationRepositoryAdapterTest {
     @Mock
     private CustomizationMapper mapper;
 
+    @InjectMocks
     private CustomizationRepositoryAdapter adapter;
-
-    @BeforeEach
-    void setUp() {
-        adapter = new CustomizationRepositoryAdapter(repository, mapper);
-    }
 
     @Test
     void findByCardId_delegatesToRepositoryAndMapper() {
@@ -41,7 +35,7 @@ class CustomizationRepositoryAdapterTest {
         when(repository.findByCardId(1)).thenReturn(entities);
         when(mapper.toCustomizations(entities)).thenReturn(customizations);
 
-        Iterable<Customization> result = adapter.findByCardId(1);
+        var result = adapter.findByCardId(1);
 
         assertThat(result).isEqualTo(customizations);
     }
@@ -54,7 +48,7 @@ class CustomizationRepositoryAdapterTest {
         when(repository.save(entity)).thenReturn(entity);
         when(mapper.toCustomization(entity)).thenReturn(customization);
 
-        Customization result = adapter.save(customization);
+        var result = adapter.save(customization);
 
         assertThat(result).isEqualTo(customization);
         verify(repository).save(entity);
