@@ -3,8 +3,10 @@ package com.rsa.bingo.app.infrastructure.controllers.web;
 import com.rsa.bingo.app.application.services.WebCardService;
 import com.rsa.bingo.app.application.services.WebPlayerService;
 import com.rsa.bingo.app.infrastructure.dtos.PlayerDTO;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import static com.rsa.bingo.app.infrastructure.Constants.*;
@@ -49,7 +51,11 @@ public class PlayerController {
     }
 
     @PostMapping
-    public String save(PlayerDTO player) {
+    public String save(@Valid PlayerDTO player, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute(PLAYER, player);
+            return "players/create";
+        }
         player = playerService.save(player);
         return String.format("redirect:/player/%d", player.getId());
     }

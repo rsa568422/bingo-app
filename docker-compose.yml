@@ -8,9 +8,9 @@ services:
     ports:
       - 9090:8080
     environment:
-      DATA_SOURCE_URL: jdbc:postgresql://bingo_db:5432/bingo
-      DATA_SOURCE_USERNAME: root
-      DATA_SOURCE_PASSWORD: root
+      DATA_SOURCE_URL: jdbc:postgresql://bingo_db:5432/${POSTGRES_DB}
+      DATA_SOURCE_USERNAME: ${POSTGRES_USER}
+      DATA_SOURCE_PASSWORD: ${POSTGRES_PASSWORD}
     depends_on:
       - bingo_db
   bingo_db:
@@ -19,6 +19,6 @@ services:
     ports:
       - 5433:5432
     environment:
-      POSTGRES_DB: bingo
-      POSTGRES_USER: root
-      POSTGRES_PASSWORD: root
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}

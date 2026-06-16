@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout bingo-app
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: 'maven'
+
+      - name: Clone and install bingo-domain
+        run: |
+          git clone https://github.com/rsa568422/bingo-domain.git /tmp/bingo-domain
+          cd /tmp/bingo-domain
+          mvn install -q -DskipTests
+
+      - name: Build bingo-app (mvn clean install)
+        run: mvn clean install
